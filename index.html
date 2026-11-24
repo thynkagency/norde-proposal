@@ -1,0 +1,1213 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>NORDE × Thynk</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500;600;700&family=Noto+Serif+Display:wght@500;600&display=swap">
+<style>
+/* Layout: one long proposal, sticky pillar nav, each pillar a full-width band with its own colour from the NORDE logo */
+:root{
+  --bg:#f5f8fa; --surface:#ffffff; --sunk:#e9f0f4;
+  --ink:#2b2a29; --muted:#5d6670; --line:#d6e0e7;
+  --blue:#007bbd; --sky:#8bc5df; --p1:#007bbd; --p2:#0a5f8f; --p3:#3d8a74;
+  --p1-soft:#e3f1f9; --p2-soft:#e2edf4; --p3-soft:#e5f2ee;
+  --warn:#9a5b00; --warn-soft:#fbf1e1;
+  --display:"Noto Serif Display", Georgia, "Times New Roman", serif;
+  --body:"Commissioner", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --wine:#7a2433; --wine-soft:#f7ecee; --coffee:#5b3a29; --coffee-soft:#f4eee9; --amber:#a8661a; --amber-soft:#f8f0e4;
+  color-scheme:light;
+}
+/* Committed white look, as requested: no dark theme */
+:root{--bg:#ffffff; --sunk:#f3f7fa; --line:#e1e8ed}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--body);margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.1rem,5vw,3.4rem)}
+h2{font-size:clamp(1.6rem,3.4vw,2.3rem)}
+h3{font-size:1.25rem}
+h4{font:600 1rem/1.35 var(--body);margin:0}
+p{margin:0}
+.lead{font-size:1.15rem;color:var(--muted);max-width:64ch}
+.eyebrow{font:600 .74rem/1 var(--body);letter-spacing:.12em;color:var(--muted)}
+.stack{display:flex;flex-direction:column;gap:16px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card p,.card li{color:var(--muted);font-size:.95rem}
+ul.clean{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+ul.clean li{padding-left:18px;position:relative}
+ul.clean li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--accent,var(--blue))}
+a{color:var(--blue)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+/* nav */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--surface);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:18px;height:60px}
+.nav img{height:34px;width:auto}
+.nav .links{display:flex;gap:4px;overflow-x:auto;margin-left:auto;scrollbar-width:none}
+.nav .links a{font:600 .78rem/1 var(--body);letter-spacing:.06em;color:var(--muted);text-decoration:none;padding:9px 10px;border-radius:6px;white-space:nowrap}
+.nav .links a:hover{background:var(--sunk);color:var(--ink)}
+
+/* hero */
+.hero{padding-block:64px 48px}
+.hero .wrap{display:flex;flex-direction:column;gap:22px}
+.waves{display:block;width:min(260px,60%);height:auto}
+.meta{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:500 .82rem/1 var(--body);padding:8px 12px;border-radius:999px;background:var(--sunk);color:var(--muted)}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.goals{margin-top:12px}
+.goal{border-top:4px solid var(--accent)}
+.goal .k{font:600 .74rem/1 var(--body);letter-spacing:.12em;color:var(--accent)}
+.goal a{font-weight:600;text-decoration:none;color:var(--accent);margin-top:auto}
+
+/* sections */
+section.band{padding-block:56px;border-top:1px solid var(--line)}
+section.band > .wrap{display:flex;flex-direction:column;gap:28px}
+.phead{display:flex;flex-direction:column;gap:12px}
+.phead .eyebrow{color:var(--accent)}
+.pill{display:inline-flex;align-items:center;gap:8px}
+.pill b{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--surface);font:700 .9rem/1 var(--body)}
+.sub{display:flex;flex-direction:column;gap:16px}
+.sub > h3{display:flex;gap:10px;align-items:baseline}
+.sub > h3 small{font:600 .72rem/1 var(--body);letter-spacing:.12em;color:var(--accent)}
+.tint{background:var(--soft);border:none}
+.p1{--accent:var(--p1);--soft:var(--p1-soft)}
+.p2{--accent:var(--p2);--soft:var(--p2-soft)}
+.p3{--accent:var(--p3);--soft:var(--p3-soft)}
+.px{--accent:var(--muted);--soft:var(--sunk)}
+
+/* sitemap */
+.sitemap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.smbar{display:flex;gap:0;min-width:900px;border-bottom:1px solid var(--line)}
+.smbar span{flex:1;font:700 .72rem/1.2 var(--body);letter-spacing:.08em;padding:14px 12px;border-right:1px solid var(--line)}
+.smbar span:last-child{border-right:none}
+.smbar .deal{color:#b4372e}
+.smbar .side{background:var(--sunk);color:var(--muted)}
+.smbar .b2b{background:var(--p1);color:#fff}
+.smcols{display:flex;min-width:900px}
+.smcols ul{flex:1;list-style:none;margin:0;padding:12px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:6px;font-size:.84rem;color:var(--muted)}
+.smcols ul:last-child{border-right:none}
+.smcols .side{background:var(--sunk)}
+.hint{font-size:.85rem;color:var(--muted)}
+
+/* flows */
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px;counter-reset:s}
+.flow > div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px;counter-increment:s;position:relative}
+.flow > div::before{content:counter(s);font:700 .8rem/1 var(--body);color:var(--accent)}
+.flow h4{font-size:.95rem}
+.flow p{font-size:.85rem;color:var(--muted)}
+.who{font:600 .68rem/1 var(--body);letter-spacing:.1em;padding:5px 8px;border-radius:4px;align-self:flex-start;margin-top:auto}
+.who.t{background:var(--soft);color:var(--accent)}
+.who.n{background:var(--sunk);color:var(--ink)}
+.who.m{background:var(--warn-soft);color:var(--warn)}
+
+/* tools */
+.tool{flex-direction:row;align-items:flex-start;gap:14px}
+.tool .ic{flex:0 0 38px;height:38px;border-radius:8px;background:var(--soft);display:grid;place-items:center;color:var(--accent);font:700 .8rem/1 var(--body)}
+.tool > div{display:flex;flex-direction:column;gap:4px;min-width:0}
+
+/* care */
+.care{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px}
+.cycles{display:flex;gap:8px;flex-wrap:wrap}
+.cycles button{font:600 .9rem/1 var(--body);padding:11px 16px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.cycles button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.cyc-note{font-size:.92rem;color:var(--muted)}
+
+/* table */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.92rem}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 .72rem/1.2 var(--body);letter-spacing:.1em;color:var(--muted);background:var(--sunk)}
+tr:last-child td{border-bottom:none}
+td:first-child{font-weight:600}
+
+.note{border-left:4px solid var(--warn);background:var(--warn-soft);border-radius:0 10px 10px 0;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.note h4{color:var(--warn)}
+.note p{color:var(--ink);font-size:.95rem}
+
+/* timeline */
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:16px}
+.phase{border-top:4px solid var(--blue)}
+.phase .when{font:600 .74rem/1 var(--body);letter-spacing:.1em;color:var(--blue)}
+.tag{display:inline-block;font:600 .66rem/1 var(--body);letter-spacing:.08em;padding:4px 6px;border-radius:4px;margin-right:4px;vertical-align:2px}
+.tag.t1{background:var(--p1-soft);color:var(--p1)} .tag.t2{background:var(--p2-soft);color:var(--p2)} .tag.t3{background:var(--p3-soft);color:var(--p3)}
+
+.extra{counter-reset:x}
+.extra .card{counter-increment:x}
+.extra h4::before{content:counter(x) ". ";color:var(--muted)}
+
+/* ===== mockups ===== */
+.mockset{display:flex;flex-direction:column;gap:14px}
+.mockhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.mockhead h4{font-family:var(--display);font-size:1.15rem;font-weight:600}
+.mockhead .hint{flex:1 1 280px}
+.mock{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 14px 36px rgba(0,70,110,.08)}
+.mbar{display:flex;align-items:center;gap:6px;padding:9px 14px;background:var(--sunk);border-bottom:1px solid var(--line);font-size:.74rem;color:var(--muted)}
+.mbar i{width:9px;height:9px;border-radius:50%;background:var(--line);display:block}
+.mbar span{margin-left:10px;background:#fff;border:1px solid var(--line);border-radius:5px;padding:3px 10px}
+.mscroll{overflow-x:auto}
+.min{min-width:900px;font-size:13px;line-height:1.45;color:var(--ink)}
+.demo{font:600 .64rem/1 var(--body);letter-spacing:.1em;color:var(--warn);background:var(--warn-soft);padding:4px 7px;border-radius:4px}
+.btl{display:block;height:100%;width:auto}
+.lab{font:600 .62rem/1.2 var(--body);letter-spacing:.12em;color:var(--muted)}
+.price{font:600 1rem/1 var(--body);font-variant-numeric:tabular-nums}
+.btn{display:inline-block;font:700 .7rem/1 var(--body);letter-spacing:.1em;padding:11px 16px;border-radius:6px;background:var(--blue);color:#fff;white-space:nowrap}
+.btn.ghost{background:transparent;color:var(--blue);border:1px solid var(--blue)}
+.btn.dark{background:var(--ink)}
+
+/* site header in mocks */
+.shead{display:flex;align-items:center;gap:22px;padding:14px 28px;border-bottom:1px solid var(--line)}
+.shead img{height:30px}
+.shead nav{display:flex;gap:16px;font:700 .62rem/1 var(--body);letter-spacing:.09em}
+.shead nav .d{color:#b4372e}
+.shead .r{margin-left:auto;display:flex;align-items:center;gap:14px;color:var(--muted);font-size:.75rem}
+.shead .r .btn{padding:9px 12px;font-size:.6rem}
+
+/* home hero */
+.hhero{position:relative;height:340px;display:grid;place-items:center;overflow:hidden;background:linear-gradient(#fff,var(--sunk))}
+.hhero .big{font:600 132px/1 var(--display);letter-spacing:.18em;color:var(--ink);opacity:.92;padding-left:.18em}
+.hhero .since{position:absolute;top:44px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:150px;font:600 .72rem/1 var(--body);letter-spacing:.2em;color:var(--blue)}
+.hhero .since span{display:flex;align-items:center;gap:10px}
+.hhero .since span::before,.hhero .since span::after{content:"";width:34px;height:1px;background:var(--blue)}
+.hhero .bottle{position:absolute;top:30px;left:50%;transform:translateX(-50%);height:300px;filter:drop-shadow(0 18px 18px rgba(0,0,0,.18))}
+.hhero .tag{position:absolute;bottom:26px;left:28px;display:flex;flex-direction:column;gap:10px;max-width:260px}
+.hhero .tag p{font:500 1.05rem/1.3 var(--display)}
+.hhero .ctr{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font:600 .66rem/1 var(--body);letter-spacing:.14em;color:var(--muted)}
+.hhero .side{position:absolute;bottom:26px;right:28px;display:flex;gap:8px}
+.cats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;padding:22px 28px}
+.cat{background:var(--sunk);border-radius:10px;padding:14px 8px 10px;display:flex;flex-direction:column;align-items:center;gap:8px;font:700 .6rem/1.2 var(--body);letter-spacing:.08em;text-align:center}
+.cat .ico{height:58px}
+.row{padding:8px 28px 24px;display:flex;flex-direction:column;gap:12px}
+.rowh{display:flex;align-items:baseline;justify-content:space-between}
+.rowh h5{font:600 1.15rem/1 var(--display);margin:0}
+.rowh a{font-size:.74rem;text-decoration:none}
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.pc{display:flex;flex-direction:column;gap:6px}
+.pc .ph{position:relative;background:var(--sunk);border-radius:10px;height:170px;display:grid;place-items:center;padding:14px}
+.pc .ph .btl{height:140px;filter:drop-shadow(0 10px 8px rgba(0,0,0,.14))}
+.pc .badge{position:absolute;top:8px;left:8px;font:700 .56rem/1 var(--body);letter-spacing:.1em;padding:4px 6px;border-radius:4px;background:#b4372e;color:#fff}
+.pc .badge.ep{background:var(--blue)}
+.pc b{font-weight:600;font-size:.8rem}
+.pc small{color:var(--muted);font-size:.7rem}
+.pc .pf{display:flex;justify-content:space-between;align-items:center}
+.pc .add{width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:700}
+.strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.prod{border:1px solid var(--line);border-radius:10px;padding:16px 12px;display:flex;flex-direction:column;gap:6px}
+.prod b{font:600 .92rem/1.2 var(--display)}
+.prod small{color:var(--muted);font-size:.68rem}
+.arts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.art{border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.art .im{height:90px}
+.art div:last-child{padding:12px;display:flex;flex-direction:column;gap:4px}
+.art b{font:600 .9rem/1.25 var(--display)}
+.b2bband{margin:6px 28px 28px;background:var(--blue);color:#fff;border-radius:12px;padding:22px 26px;display:flex;align-items:center;gap:20px}
+.b2bband b{font:600 1.25rem/1.2 var(--display)}
+.b2bband p{opacity:.9;font-size:.8rem}
+.b2bband .btn{background:#fff;color:var(--blue);margin-left:auto}
+
+/* category page */
+.crumbs{padding:14px 28px 0;font-size:.7rem;color:var(--muted)}
+.ctop{padding:8px 28px 16px;display:flex;align-items:flex-end;gap:16px;border-bottom:1px solid var(--line)}
+.ctop h5{font:600 1.9rem/1 var(--display);margin:0}
+.ctop .n{color:var(--muted);font-size:.75rem}
+.ctop .sort{margin-left:auto;border:1px solid var(--line);border-radius:6px;padding:7px 10px;font-size:.72rem;color:var(--muted)}
+.chips{display:flex;gap:6px;padding:14px 28px 0}
+.chips span{border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:.72rem}
+.chips span.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.cbody{display:grid;grid-template-columns:190px 1fr;gap:24px;padding:16px 28px 28px}
+.filt{display:flex;flex-direction:column;gap:16px}
+.fg{display:flex;flex-direction:column;gap:7px;font-size:.74rem}
+.fg label{display:flex;align-items:center;gap:7px;color:var(--muted)}
+.fg label i{width:12px;height:12px;border:1px solid #b8c4cc;border-radius:3px;display:block}
+.fg label i.on{background:var(--blue);border-color:var(--blue)}
+.range{height:4px;background:var(--line);border-radius:2px;position:relative}
+.range::after{content:"";position:absolute;left:15%;right:35%;top:0;bottom:0;background:var(--blue);border-radius:2px}
+.cbody .pgrid{grid-template-columns:repeat(4,1fr)}
+
+/* product page */
+.ptop{display:grid;grid-template-columns:200px 1fr 330px;gap:20px;padding:30px 28px 0;position:relative}
+.porigin{display:flex;flex-direction:column;gap:14px;padding-top:20px}
+.oline{display:flex;align-items:center;gap:10px;font:700 .66rem/1.2 var(--body);letter-spacing:.09em}
+.oline small{display:block;font:400 .68rem/1.2 var(--body);letter-spacing:0;color:var(--muted)}
+.oline .dot{width:26px;height:26px;border-radius:50%;background:var(--wine-soft);display:grid;place-items:center;color:var(--wine);font-size:.7rem}
+.minimap{width:120px;height:auto}
+.pstage{position:relative;height:420px}
+.pstage .circ{position:absolute;left:50%;top:70px;width:270px;height:270px;border-radius:50%;transform:translateX(-50%);background:radial-gradient(circle at 35% 30%,#c95b6c,var(--wine))}
+.pstage .bottle{position:absolute;left:50%;top:0;height:470px;transform:translateX(-50%);z-index:2;filter:drop-shadow(0 26px 22px rgba(0,0,0,.25))}
+.pinfo{display:flex;flex-direction:column;gap:12px;padding-top:10px}
+.pinfo h5{font:600 1.65rem/1.15 var(--display);margin:0}
+.badges{display:flex;flex-wrap:wrap;gap:6px}
+.badges span{font:700 .58rem/1 var(--body);letter-spacing:.09em;padding:6px 8px;border-radius:4px;background:var(--sunk)}
+.badges .e{background:var(--p1-soft);color:var(--blue)}
+.sizes{display:flex;gap:8px}
+.sizes span{border:1px solid var(--line);border-radius:6px;padding:9px 12px;font-size:.72rem}
+.sizes span.on{border-color:var(--wine);box-shadow:inset 0 0 0 1px var(--wine)}
+.buy{display:flex;align-items:center;gap:10px}
+.qty{display:flex;border:1px solid var(--line);border-radius:6px}
+.qty span{padding:9px 11px;font-size:.8rem}
+.ship{font-size:.72rem;color:var(--muted);display:flex;flex-direction:column;gap:4px;border-top:1px solid var(--line);padding-top:10px}
+.pro{font-size:.74rem;color:var(--blue);font-weight:600}
+.pband{background:var(--sunk);margin-top:-60px;padding:90px 28px 28px;display:grid;grid-template-columns:200px 1fr 330px;gap:20px}
+.temp .lab{display:block;margin-bottom:6px}
+.temp b{font:400 2.2rem/1 var(--body);font-variant-numeric:tabular-nums}
+.pair{display:flex;flex-direction:column;gap:8px;margin-top:18px}
+.pair span{display:flex;align-items:center;gap:8px;font:700 .62rem/1 var(--body);letter-spacing:.08em}
+.pair i{width:30px;height:30px;border-radius:50%;background:var(--wine);display:block}
+.bars{display:flex;flex-direction:column;gap:10px}
+.bar{display:grid;grid-template-columns:110px 1fr;align-items:center;gap:10px;font-size:.72rem}
+.bar div{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+.bar div i{height:6px;border-radius:3px;background:#d9e1e7}
+.bar div i.on{background:var(--wine)}
+.spec{display:flex;flex-direction:column;gap:6px}
+.spec h6{font:600 .95rem/1.2 var(--display);margin:0}
+.spec p{font-size:.74rem;color:var(--muted)}
+.tech{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;font-size:.72rem}
+.tech span{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:5px}
+.tech span em{font-style:normal;color:var(--muted)}
+.pmore{padding:24px 28px 28px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.acc{display:flex;flex-direction:column}
+.acc div{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line);font:700 .66rem/1 var(--body);letter-spacing:.1em;color:var(--wine)}
+.acc div em{font-style:normal;font-weight:400;letter-spacing:0;color:var(--muted)}
+.pmore .pgrid{grid-template-columns:repeat(3,1fr)}
+.pmore .pc .ph{height:130px}.pmore .pc .ph .btl{height:105px}
+
+/* phone */
+.phones{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start}
+.phone{width:280px;max-width:100%;border:9px solid #1d2328;border-radius:34px;overflow:hidden;background:#fff;font-size:12px;line-height:1.4;flex:0 0 auto}
+.phone .top{height:250px;position:relative;background:var(--sunk);display:grid;place-items:center}
+.phone .top .lab{position:absolute;top:18px;left:0;right:0;text-align:center}
+.phone .top .btl{height:200px;filter:drop-shadow(0 14px 12px rgba(0,0,0,.2))}
+.phone .top .back{position:absolute;top:14px;left:16px;font-size:1rem}
+.sheet{background:#1d2328;color:#fff;border-radius:22px 22px 0 0;margin-top:-18px;position:relative;padding:20px 18px 18px;display:flex;flex-direction:column;gap:10px}
+.sheet::before{content:"";width:40px;height:4px;border-radius:2px;background:#4a545c;align-self:center;margin-top:-8px}
+.sheet h6{font:600 1.25rem/1.15 var(--display);margin:0}
+.sheet p{color:#b9c3ca;font-size:.74rem}
+.sheet .row2{display:flex;justify-content:space-between;align-items:center}
+.sheet .price{color:#fff}
+.sheet .btn{background:var(--sky);color:#1d2328}
+.sheet .acc div{color:var(--sky);border-color:#343d44}
+.phone.cat .ph2{padding:16px 14px;display:flex;flex-direction:column;gap:10px}
+.phone.cat h6{font:600 1.4rem/1 var(--display);margin:0}
+.phone.cat .chips{padding:0;flex-wrap:nowrap;overflow:hidden}
+.phone.cat .pgrid{grid-template-columns:1fr 1fr;gap:8px}
+.phone.cat .pc .ph{height:120px}.phone.cat .pc .ph .btl{height:96px}
+.phone .tabs{display:flex;justify-content:space-around;border-top:1px solid var(--line);padding:10px 0;font-size:.62rem;color:var(--muted)}
+.phone .tabs .on{color:var(--blue);font-weight:700}
+.notes{flex:1 1 280px;min-width:0}
+
+footer{padding-block:40px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between}
+/* tabs */
+.nav .links a{display:inline-flex;align-items:center;gap:7px}
+.nav .links a b{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--sunk);color:var(--muted);font:700 .68rem/1 var(--body)}
+.nav .links a[aria-current="page"]{background:var(--p1-soft);color:var(--blue)}
+.nav .links a[aria-current="page"] b{background:var(--blue);color:#fff}
+.tabnext{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;border-top:1px solid var(--line);padding-top:24px}
+.tabnext a{font-weight:600;text-decoration:none;padding:12px 16px;border:1px solid var(--line);border-radius:8px}
+.tabnext a:hover{background:var(--sunk)}
+</style>
+
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="wine" viewBox="0 0 40 140"><path fill="currentColor" d="M16 0h8v40c0 7 12 12 12 26v70a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V66c0-14 12-19 12-26z"/><rect x="15.5" y="0" width="9" height="20" fill="#1d2328" opacity=".55"/><rect x="7" y="82" width="26" height="32" rx="1.5" fill="#fff"/><rect x="11" y="90" width="18" height="2.5" fill="#c3ccd3"/><rect x="13" y="96" width="14" height="1.8" fill="#dbe2e7"/><rect x="14" y="104" width="12" height="4" fill="#007bbd" opacity=".7"/><path d="M8 70c2-5 5-8 7-10" stroke="#fff" stroke-opacity=".25" stroke-width="2" fill="none"/></symbol>
+<symbol id="beer" viewBox="0 0 40 140"><path fill="currentColor" d="M15 6h10v14c0 8 11 14 11 28v88a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V48c0-14 11-20 11-28z"/><rect x="13" y="0" width="14" height="9" rx="2" fill="#c3ccd3"/><rect x="6" y="74" width="28" height="36" rx="2" fill="#fff"/><circle cx="20" cy="88" r="6" fill="none" stroke="#a8661a" stroke-width="1.5"/><rect x="11" y="98" width="18" height="2" fill="#c3ccd3"/></symbol>
+<symbol id="spirit" viewBox="0 0 40 140"><path fill="currentColor" fill-opacity=".85" d="M16 0h8v30c0 4 10 6 10 16v88a6 6 0 0 1-6 6H12a6 6 0 0 1-6-6V46c0-10 10-12 10-16z"/><rect x="14.5" y="0" width="11" height="14" rx="1.5" fill="#2b2a29"/><rect x="9" y="76" width="22" height="30" fill="#fff"/><rect x="12" y="84" width="16" height="2.5" fill="#2b2a29"/><rect x="13" y="92" width="14" height="1.8" fill="#c3ccd3"/></symbol>
+<symbol id="bag" viewBox="0 0 80 110"><path fill="currentColor" d="M10 12h60l6 92a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><rect x="10" y="4" width="60" height="10" fill="currentColor" opacity=".8"/><rect x="18" y="40" width="44" height="40" rx="2" fill="#fff"/><circle cx="40" cy="54" r="7" fill="none" stroke="#5b3a29" stroke-width="2"/><rect x="26" y="68" width="28" height="3" fill="#c3ccd3"/></symbol>
+<symbol id="machine" viewBox="0 0 80 110"><rect x="8" y="6" width="64" height="20" rx="4" fill="currentColor"/><rect x="12" y="26" width="56" height="62" fill="currentColor" opacity=".75"/><rect x="4" y="88" width="72" height="16" rx="3" fill="currentColor"/><rect x="30" y="40" width="20" height="8" rx="2" fill="#2b2a29"/><rect x="33" y="62" width="14" height="16" rx="2" fill="#fff"/><circle cx="60" cy="16" r="3" fill="#8bc5df"/></symbol>
+</defs></svg>
+<nav class="nav" aria-label="Ενότητες">
+  <div class="wrap">
+    <img src="data:image/webp;base64,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" alt="NORDE">
+    <div class="links">
+      <a href="#website" data-tab="website"><b>1</b>WEBSITE &amp; ΥΠΟΔΟΜΗ</a>
+      <a href="#ads" data-tab="ads"><b>2</b>ΔΙΑΦΗΜΙΣΗ</a>
+      <a href="#social" data-tab="social"><b>3</b>SOCIAL &amp; ΠΕΡΙΕΧΟΜΕΝΟ</a>
+      <a href="#plan" data-tab="plan"><b>4</b>ΣΕΙΡΑ &amp; ΚΟΣΤΟΣ</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <svg class="waves" viewBox="0 0 260 40" aria-hidden="true"><path d="M0 14 Q32 2 65 14 T130 14 T195 14 T260 14" fill="none" stroke="var(--blue)" stroke-width="3"/><path d="M0 24 Q32 12 65 24 T130 24 T195 24 T260 24" fill="none" stroke="var(--sky)" stroke-width="3"/><path d="M0 34 Q32 22 65 34 T130 34 T195 34 T260 34" fill="none" stroke="var(--p3)" stroke-width="3"/></svg>
+    <p class="eyebrow">NORDE × THYNK · ΠΡΟΤΑΣΗ ΨΗΦΙΑΚΗΣ ΑΝΑΒΑΘΜΙΣΗΣ</p>
+    <h1>Είκοσι χρόνια γνώσης στον καφέ και στο ποτό. Τώρα και online.</h1>
+    <p class="lead">Από το 2006 η NORDE φέρνει στην Ήπειρο καφέ, κρασιά, μπύρες και εξοπλισμό από παραγωγούς που ξέρει από κοντά. Αυτό που προτείνουμε είναι να φανεί αυτή η δουλειά: ένα site που δείχνει σωστά τους παραγωγούς και τα προϊόντα, διαφήμιση που φέρνει επαγγελματίες σε επικοινωνία, και περιεχόμενο με τους ανθρώπους πίσω από τη NORDE.</p>
+    <div class="meta">
+      <span class="chip">Σχέδιο προς συζήτηση · 24 Νοεμβρίου 2026</span>
+      <span class="chip">Για τον Γιώργο Βακάλη και τον Βαγγέλη Τσούτσινο</span>
+      <span class="chip warn">Κοστολόγηση στο τέλος κάθε ενότητας και συνολικά στην 4η</span>
+    </div>
+    <div class="grid g3 goals">
+      <article class="card goal p1">
+        <span class="k">ΠΥΛΩΝΑΣ 1</span>
+        <h3>Website &amp; ψηφιακή υποδομή</h3>
+        <p>Νέο e-shop για ιδιώτες, φόρμα για επαγγελματίες, δικός σας server με backup και υποστήριξη, Google, social και μέτρηση στήνονται σωστά από την αρχή.</p>
+        <a href="#website">Δες τι περιλαμβάνει →</a>
+      </article>
+      <article class="card goal p2">
+        <span class="k">ΠΥΛΩΝΑΣ 2</span>
+        <h3>Διαφήμιση</h3>
+        <p>Google Ads και Meta Ads που φέρνουν επαγγελματίες HoReCa σε επικοινωνία, κάνουν τη NORDE γνωστή και, μόλις βγει το e-shop, φέρνουν πωλήσεις.</p>
+        <a href="#ads">Δες τι περιλαμβάνει →</a>
+      </article>
+      <article class="card goal p3">
+        <span class="k">ΠΥΛΩΝΑΣ 3</span>
+        <h3>Social media &amp; περιεχόμενο</h3>
+        <p>Κοινή στρατηγική, και από εκεί εμείς αναλαμβάνουμε όλη την παραγωγή: concepts, γυρίσματα, κείμενα, editing, μέχρι το τελικό post για έγκριση.</p>
+        <a href="#social">Δες τι περιλαμβάνει →</a>
+      </article>
+    </div>
+  </div>
+</header>
+
+<!-- ============ PILLAR 1 ============ -->
+<section class="band p1" id="website">
+  <div class="wrap">
+    <div class="phead">
+      <span class="pill"><b>1</b><span class="eyebrow">ΠΥΛΩΝΑΣ 1 · WEBSITE &amp; ΨΗΦΙΑΚΗ ΥΠΟΔΟΜΗ</span></span>
+      <h2>Μια βιτρίνα που δείχνει τι φέρνει η NORDE, και θεμέλια που δεν χάνουν τίποτα</h2>
+      <p class="lead">Το νέο site πουλάει σε ιδιώτες σε όλη την Ελλάδα. Ο επαγγελματίας βρίσκει μια ξεκάθαρη φόρμα και τον παίρνει τηλέφωνο άνθρωπος της NORDE. Γύρω από το site στήνουμε τα εργαλεία που χρειάζονται για να φαίνεται η επιχείρηση στη Google και να μετράμε τι φέρνει κάθε διαφήμιση.</p>
+    </div>
+
+    <div class="sub">
+      <h3><small>1Α</small>Η δομή του νέου site</h3>
+      <div class="sitemap" role="region" aria-label="Δομή μενού" tabindex="0">
+        <div class="smbar">
+          <span>ΚΡΑΣΙΑ</span><span>ΚΑΦΕΣ &amp; ΡΟΦΗΜΑΤΑ</span><span>ΜΠΥΡΕΣ</span><span>ΑΠΟΣΤΑΓΜΑΤΑ</span><span>DELI &amp; BAR</span><span>ΜΗΧΑΝΕΣ &amp; ΑΞΕΣΟΥΑΡ</span><span class="deal">DEALS</span><span class="side">ΠΑΡΑΓΩΓΟΙ</span><span class="side">ΟΔΗΓΟΣ</span><span class="b2b">ΓΙΑ ΕΠΑΓΓΕΛΜΑΤΙΕΣ</span>
+        </div>
+        <div class="smcols">
+          <ul><li>Κόκκινα</li><li>Λευκά</li><li>Ροζέ</li><li>Αφρώδη</li><li>Γλυκά</li><li>Φυσικοί οίνοι</li><li>Κρασιά της Ηπείρου</li></ul>
+          <ul><li>Espresso κόκκοι</li><li>Αλεσμένος</li><li>Κάψουλες</li><li>Ελληνικός</li><li>Φίλτρου</li><li>Τσάι &amp; αφεψήματα</li><li>Σοκολάτες</li></ul>
+          <ul><li>Ελληνικές μικροζυθοποιίες</li><li>Εισαγωγής</li><li>Φίλτρο ανά στυλ</li></ul>
+          <ul><li>Τσίπουρο</li><li>Ούζο</li><li>Gin, ρούμι, ουίσκι</li><li>Βότκα, τεκίλα</li><li>Λικέρ &amp; βερμούτ</li></ul>
+          <ul><li>Χυμοί &amp; αναψυκτικά</li><li>Σιρόπια &amp; βάσεις κοκτέιλ</li><li>Deli</li></ul>
+          <ul><li>Μηχανές σπιτιού &amp; γραφείου</li><li>Αξεσουάρ barista</li><li>Καθαριστικά</li></ul>
+          <ul><li>Όλες οι προσφορές σε κρασί, μπύρα και καφέ</li></ul>
+          <ul class="side"><li>Ευρετήριο Α–Ω</li><li>Σελίδα ανά παραγωγό</li></ul>
+          <ul class="side"><li>Άρθρα για κρασί, espresso, μπύρα, παραγωγούς</li></ul>
+          <ul><li>Φόρμα ενδιαφέροντος</li><li>Δειγματισμός</li></ul>
+        </div>
+      </div>
+      <p class="hint">Η ταξινόμηση βγαίνει από τους 894 κωδικούς του Pegasus. Οι συσκευασίες χονδρικής (βαρέλια, κιβώτια, take-away) δεν εμφανίζονται στο shop των ιδιωτών.</p>
+    </div>
+
+    <div class="sub">
+      <h3><small>1Β</small>Πώς θα μοιάζει το site</h3>
+      <p class="hint">Ενδεικτικά σχέδια για τη δομή και την αίσθηση, όχι τελικό design. Τα προϊόντα, οι τιμές και τα στοιχεία είναι παραδείγματα. Το πλαίσιο μένει λευκό και ήσυχο, το μπλε της NORDE είναι το χρώμα των κουμπιών, και κάθε κατηγορία έχει μια διακριτική δική της απόχρωση. Το χρώμα το δίνουν οι ετικέτες των προϊόντων.</p>
+
+      <!-- HOME -->
+      <div class="mockset">
+        <div class="mockhead"><h4>Αρχική σελίδα</h4><span class="demo">ΕΝΔΕΙΚΤΙΚΟ</span></div>
+        <div class="mock"><div class="mbar"><i></i><i></i><i></i><span>Αρχική · NORDE</span></div>
+          <div class="mscroll"><div class="min">
+            <div class="shead"><img src="data:image/webp;base64,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" alt="NORDE"><nav><span>ΚΡΑΣΙΑ</span><span>ΚΑΦΕΣ</span><span>ΜΠΥΡΕΣ</span><span>ΑΠΟΣΤΑΓΜΑΤΑ</span><span>DELI &amp; BAR</span><span>ΜΗΧΑΝΕΣ</span><span class="d">DEALS</span><span>ΠΑΡΑΓΩΓΟΙ</span><span>ΟΔΗΓΟΣ</span></nav><div class="r"><span>Αναζήτηση</span><span>Καλάθι (0)</span><span class="btn">ΓΙΑ ΕΠΑΓΓΕΛΜΑΤΙΕΣ</span></div></div>
+            <div class="hhero">
+              <div class="since"><span>ΙΩΑΝΝΙΝΑ</span><span>ΑΠΟ ΤΟ 2006</span></div>
+              <div class="big">NORDE</div>
+              <svg class="bottle btl" viewBox="0 0 40 140" style="color:#4a1420"><use href="#wine"/></svg>
+              <div class="tag"><p>Το ταξίδι ξεκινάει εδώ.</p><span><span class="btn">ΔΕΣ ΤΑ ΚΡΑΣΙΑ</span></span></div>
+              <div class="ctr">01 — 04</div>
+              <div class="side"><span class="btn ghost">ΚΑΦΕΣ</span><span class="btn ghost">ΜΠΥΡΕΣ</span></div>
+            </div>
+            <div class="cats">
+              <div class="cat"><svg class="ico btl" viewBox="0 0 40 140" style="color:#4a1420"><use href="#wine"/></svg>ΚΡΑΣΙΑ</div>
+              <div class="cat"><svg class="ico btl" viewBox="0 0 80 110" style="color:var(--coffee)"><use href="#bag"/></svg>ΚΑΦΕΣ</div>
+              <div class="cat"><svg class="ico btl" viewBox="0 0 40 140" style="color:#3a2414"><use href="#beer"/></svg>ΜΠΥΡΕΣ</div>
+              <div class="cat"><svg class="ico btl" viewBox="0 0 40 140" style="color:#b9c9cf"><use href="#spirit"/></svg>ΑΠΟΣΤΑΓΜΑΤΑ</div>
+              <div class="cat"><svg class="ico btl" viewBox="0 0 40 140" style="color:#c9852a"><use href="#beer"/></svg>DELI &amp; BAR</div>
+              <div class="cat"><svg class="ico btl" viewBox="0 0 80 110" style="color:#6b7780"><use href="#machine"/></svg>ΜΗΧΑΝΕΣ</div>
+            </div>
+            <div class="row">
+              <div class="rowh"><h5>Deals της εβδομάδας</h5><a href="#website">Όλες οι προσφορές →</a></div>
+              <div class="pgrid">
+                <div class="pc"><div class="ph"><span class="badge">DEAL</span><svg class="btl" viewBox="0 0 40 140" style="color:#2f3d2a"><use href="#wine"/></svg></div><b>Λευκό ξηρό</b><small>Οινοποιείο · 750ml</small><div class="pf"><span class="price">€ —,—</span><span class="add">+</span></div></div>
+                <div class="pc"><div class="ph"><span class="badge">DEAL</span><svg class="btl" viewBox="0 0 40 140" style="color:#3a2414"><use href="#beer"/></svg></div><b>Μπύρα weiss</b><small>Ζυθοποιία · 330ml</small><div class="pf"><span class="price">€ —,—</span><span class="add">+</span></div></div>
+                <div class="pc"><div class="ph"><span class="badge">DEAL</span><svg class="btl" viewBox="0 0 80 110" style="color:var(--coffee)"><use href="#bag"/></svg></div><b>Espresso σε κόκκους</b><small>Brand · 1kg</small><div class="pf"><span class="price">€ —,—</span><span class="add">+</span></div></div>
+                <div class="pc"><div class="ph"><span class="badge">DEAL</span><svg class="btl" viewBox="0 0 40 140" style="color:#d48a8f"><use href="#wine"/></svg></div><b>Ροζέ</b><small>Οινοποιείο · 750ml</small><div class="pf"><span class="price">€ —,—</span><span class="add">+</span></div></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="rowh"><h5>Οι παραγωγοί μας</h5><a href="#website">Όλοι οι παραγωγοί →</a></div>
+              <div class="strip">
+                <div class="prod"><b>Κτήμα Μυλωνά</b><small>Δες τα κρασιά →</small></div>
+                <div class="prod"><b>Μονή Βοτσάς</b><small>Δες τα κρασιά →</small></div>
+                <div class="prod"><b>Βαϊμάκης</b><small>Δες τα κρασιά →</small></div>
+                <div class="prod"><b>Μαρκατσέλης</b><small>Δες τα κρασιά →</small></div>
+                <div class="prod"><b>Κερκυραϊκή Ζυθοποιία</b><small>Δες τις μπύρες →</small></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="rowh"><h5>Από τον Οδηγό</h5><a href="#website">Όλα τα άρθρα →</a></div>
+              <div class="arts">
+                <div class="art"><div class="im" style="background:var(--wine-soft)"></div><div><span class="lab">ΚΡΑΣΙ</span><b>Ποιο κρασί με ποιο φαγητό</b></div></div>
+                <div class="art"><div class="im" style="background:var(--coffee-soft)"></div><div><span class="lab">ΚΑΦΕΣ</span><b>Espresso στο σπίτι: τα βασικά</b></div></div>
+                <div class="art"><div class="im" style="background:var(--p1-soft)"></div><div><span class="lab">ΑΠΟΣΤΑΓΜΑΤΑ</span><b>Τσίπουρο ή ούζο; Οι διαφορές</b></div></div>
+              </div>
+            </div>
+            <div class="b2bband"><div><b>Είσαι επαγγελματίας;</b><p>Ζήτα τιμή χονδρικής ή δειγματισμό. Σε παίρνουμε μέσα στην επόμενη εργάσιμη.</p></div><span class="btn">ΖΗΤΑ ΕΠΙΚΟΙΝΩΝΙΑ</span></div>
+          </div></div>
+        </div>
+        <ul class="clean hint">
+          <li>Στην κορυφή, το μπουκάλι πάνω σε μεγάλη τυπογραφία, όπως στο reference της ζυθοποιίας. Τέσσερις εναλλαγές: κρασί, καφές, μπύρα, deals.</li>
+          <li>Αμέσως κάτω οι κατηγορίες με εικονίδια, μετά οι προσφορές, οι παραγωγοί και τα άρθρα. Στο τέλος, η μπάρα για επαγγελματίες.</li>
+        </ul>
+      </div>
+
+      <!-- CATEGORY -->
+      <div class="mockset">
+        <div class="mockhead"><h4>Κατηγορία (το «marketplace»)</h4><span class="demo">ΕΝΔΕΙΚΤΙΚΟ</span></div>
+        <div class="mock"><div class="mbar"><i></i><i></i><i></i><span>Κρασιά · Λευκά</span></div>
+          <div class="mscroll"><div class="min">
+            <div class="shead"><img src="data:image/webp;base64,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" alt="NORDE"><nav><span>ΚΡΑΣΙΑ</span><span>ΚΑΦΕΣ</span><span>ΜΠΥΡΕΣ</span><span>ΑΠΟΣΤΑΓΜΑΤΑ</span><span>DELI &amp; BAR</span><span>ΜΗΧΑΝΕΣ</span><span class="d">DEALS</span><span>ΠΑΡΑΓΩΓΟΙ</span><span>ΟΔΗΓΟΣ</span></nav><div class="r"><span>Αναζήτηση</span><span>Καλάθι (0)</span></div></div>
+            <div class="crumbs">Αρχική / Κρασιά / Λευκά</div>
+            <div class="ctop"><h5>Λευκά κρασιά</h5><span class="n">Ενδεικτικά 8 από —</span><span class="sort">Ταξινόμηση: Δημοφιλή ▾</span></div>
+            <div class="chips"><span class="on">Όλα</span><span>Ντεμπίνα</span><span>Ασύρτικο</span><span>Μαλαγουζιά</span><span>Ροδίτης</span><span>Chardonnay</span><span>Κρασιά της Ηπείρου</span></div>
+            <div class="cbody">
+              <div class="filt">
+                <div class="fg"><span class="lab">ΧΩΡΑ</span><label><i class="on"></i>Ελλάδα</label><label><i></i>Ιταλία</label><label><i></i>Γαλλία</label></div>
+                <div class="fg"><span class="lab">ΠΕΡΙΟΧΗ</span><label><i class="on"></i>Ήπειρος</label><label><i></i>Μακεδονία</label><label><i></i>Πελοπόννησος</label></div>
+                <div class="fg"><span class="lab">ΤΥΠΟΣ</span><label><i class="on"></i>Ξηρό</label><label><i></i>Ημίξηρο</label><label><i></i>Γλυκό</label></div>
+                <div class="fg"><span class="lab">ΠΑΡΑΓΩΓΟΣ</span><label><i></i>Όλοι οι παραγωγοί</label></div>
+                <div class="fg"><span class="lab">ΤΙΜΗ</span><div class="range"></div></div>
+              </div>
+              <div class="pgrid">
+                <div class="pc"><div class="ph"><span class="badge ep">ΗΠΕΙΡΟΣ</span><svg class="btl" viewBox="0 0 40 140" style="color:#2f3d2a"><use href="#wine"/></svg></div><b>Ντεμπίνα 2024</b><small>Οινοποιείο · 750ml</small><div class="pf"><span class="price">€ —,—</span><span class="add">+</span></div></div>
+                <div class="pc"><div class="ph"><svg class="btl" viewBox="0 0 40 140" style="color:#c9c27a"><use href="#wine"/></svg></div><b>Ασύρτικο</b><small>Οινοποιείο · 750ml</small><div class="pf"><span class="price">€ —,—</span><span class="add">+</span></div></div>
+                <div class="pc"><div class="ph"><span class="badge">DEAL</span><svg class="btl" viewBox="0 0 40 140" style="color:#3c4a33"><use href="#wine"/></svg></div><b>Μαλαγουζιά</b><small>Οινοποιείο · 750ml</small><div class="pf"><span class="price">€ —,—</span><span class="add">+</span></div></div>
+                <div class="pc"><div class="ph"><svg class="btl" viewBox="0 0 40 140" style="color:#2a3a3f"><use href="#wine"/></svg></div><b>Chardonnay</b><small>Οινοποιείο · 750ml</small><div class="pf"><span class="price">€ —,—</span><span class="add">+</span></div></div>
+                <div class="pc"><div class="ph"><span class="badge ep">ΗΠΕΙΡΟΣ</span><svg class="btl" viewBox="0 0 40 140" style="color:#d7cf8e"><use href="#wine"/></svg></div><b>Λευκό Ζίτσας</b><small>Οινοποιείο · 750ml</small><div class="pf"><span class="price">€ —,—</span><span class="add">+</span></div></div>
+                <div class="pc"><div class="ph"><svg class="btl" viewBox="0 0 40 140" style="color:#2f3d2a"><use href="#wine"/></svg></div><b>Ροδίτης</b><small>Οινοποιείο · 750ml</small><div class="pf"><span class="price">€ —,—</span><span class="add">+</span></div></div>
+                <div class="pc"><div class="ph"><svg class="btl" viewBox="0 0 40 140" style="color:#47523b"><use href="#wine"/></svg></div><b>Λευκό χαρμάνι</b><small>Οινοποιείο · 750ml</small><div class="pf"><span class="price">€ —,—</span><span class="add">+</span></div></div>
+                <div class="pc"><div class="ph"><span class="badge">DEAL</span><svg class="btl" viewBox="0 0 40 140" style="color:#c7c08a"><use href="#wine"/></svg></div><b>Αφρώδες λευκό</b><small>Οινοποιείο · 750ml</small><div class="pf"><span class="price">€ —,—</span><span class="add">+</span></div></div>
+              </div>
+            </div>
+          </div></div>
+        </div>
+        <ul class="clean hint">
+          <li>Ομοιόμορφες φωτογραφίες σε ανοιχτό φόντο, όπως στο reference με το πλέγμα μπουκαλιών. Γι' αυτό χρειάζεται η φωτογράφιση ή η επεξεργασία των φωτογραφιών προϊόντων.</li>
+          <li>Γρήγορα φίλτρα ποικιλίας στην κορυφή και πλήρη φίλτρα στο πλάι: χώρα, περιοχή, τύπος, παραγωγός, τιμή. Ίδια λογική για καφέ (μορφή, brand) και μπύρα (στυλ, ζυθοποιία).</li>
+          <li>Badges μόνο με πραγματική πληροφορία: Deal, Ήπειρος, και Αποκλειστικό όπου επιβεβαιωθεί.</li>
+        </ul>
+      </div>
+
+      <!-- PRODUCT -->
+      <div class="mockset">
+        <div class="mockhead"><h4>Σελίδα προϊόντος</h4><span class="demo">ΕΝΔΕΙΚΤΙΚΟ</span></div>
+        <div class="mock"><div class="mbar"><i></i><i></i><i></i><span>Κρασιά · Λευκά · Ντεμπίνα 2024</span></div>
+          <div class="mscroll"><div class="min">
+            <div class="shead"><img src="data:image/webp;base64,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" alt="NORDE"><nav><span>ΚΡΑΣΙΑ</span><span>ΚΑΦΕΣ</span><span>ΜΠΥΡΕΣ</span><span>ΑΠΟΣΤΑΓΜΑΤΑ</span><span>DELI &amp; BAR</span><span>ΜΗΧΑΝΕΣ</span><span class="d">DEALS</span><span>ΠΑΡΑΓΩΓΟΙ</span><span>ΟΔΗΓΟΣ</span></nav><div class="r"><span>Αναζήτηση</span><span>Καλάθι (0)</span></div></div>
+            <div class="ptop">
+              <div class="porigin">
+                <div class="oline"><span class="dot">●</span><div>ΕΛΛΑΔΑ<small>Ζίτσα, Ήπειρος</small></div></div>
+                <div class="oline"><span class="dot">◐</span><div>ΛΕΥΚΟ</div></div>
+                <div class="oline"><span class="dot">○</span><div>ΞΗΡΟ</div></div>
+                <div class="oline"><span class="dot">✿</span><div>ΝΤΕΜΠΙΝΑ</div></div>
+                <div class="oline"><span class="dot">◇</span><div>ΠΑΡΑΓΩΓΟΣ<small>Σελίδα παραγωγού →</small></div></div>
+              </div>
+              <div class="pstage"><div class="circ"></div><svg class="bottle btl" viewBox="0 0 40 140" style="color:#2f3d2a"><use href="#wine"/></svg></div>
+              <div class="pinfo">
+                <span class="lab">ΟΙΝΟΠΟΙΕΙΟ · ΚΩΔ. 000000</span>
+                <h5>Ντεμπίνα 2024, 750ml</h5>
+                <div class="badges"><span class="e">ΑΠΟ ΤΗΝ ΗΠΕΙΡΟ</span><span>ΑΠΟΚΛΕΙΣΤΙΚΟ*</span></div>
+                <div class="sizes"><span class="on">2024 · 750ml</span><span>2023 · 750ml</span><span>1,5L</span></div>
+                <div class="buy"><span class="price" style="font-size:1.5rem">€ —,—</span><div class="qty"><span>−</span><span>1</span><span>+</span></div><span class="btn dark">ΣΤΟ ΚΑΛΑΘΙ</span></div>
+                <div class="ship"><span>Παράδοση: κόστος και χρόνος ανά περιοχή, μόλις κλειδώσει η πολιτική μεταφορικών</span><span>Δωρεάν μεταφορικά πάνω από ένα ποσό, αν το αποφασίσουμε</span></div>
+                <span class="pro">Είσαι επαγγελματίας; Ζήτα τιμή χονδρικής →</span>
+                <span class="btn ghost" style="align-self:flex-start">ΚΑΤΕΒΑΣΕ ΤΟ ΤΕΧΝΙΚΟ ΔΕΛΤΙΟ</span>
+              </div>
+            </div>
+            <div class="pband">
+              <div class="temp"><span class="lab">ΘΕΡΜΟΚΡΑΣΙΑ ΣΕΡΒΙΡΙΣΜΑΤΟΣ</span><b>10–12°C</b>
+                <div class="pair"><span><i></i>ΨΑΡΙ</span><span><i></i>ΘΑΛΑΣΣΙΝΑ</span><span><i></i>ΤΥΡΙΑ</span></div>
+              </div>
+              <div class="stack" style="gap:18px">
+                <div class="spec"><h6>Γιατί το αγαπάμε</h6><p>Δύο με τρεις παράγραφοι για το κρασί και τον παραγωγό, στη φωνή ενός εμπόρου που τον ξέρει από κοντά. Μόνο στα κύρια προϊόντα.</p></div>
+                <div class="bars">
+                  <div class="bar"><span>Αρωματική ένταση</span><div><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+                  <div class="bar"><span>Σώμα</span><div><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div></div>
+                  <div class="bar"><span>Οξύτητα</span><div><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div>
+                </div>
+                <div class="spec"><h6>Αρώματα &amp; γεύση</h6><p>Τα αρώματα σε λίστα και μία πρόταση για τη γεύση. Σε όλα τα προϊόντα.</p></div>
+              </div>
+              <div class="spec"><h6>Τα τεχνικά</h6>
+                <div class="tech"><span>Χρώμα<em>Λευκό</em></span><span>Τύπος<em>Ξηρό</em></span><span>Χρονιά<em>2024</em></span><span>Αλκοόλ<em>—</em></span><span>Ποικιλία<em>Ντεμπίνα</em></span><span>Φιάλη<em>750ml</em></span><span>Βαρέλι<em>—</em></span><span>Παλαίωση<em>—</em></span><span>Πώμα<em>—</em></span><span>Βιολογικό<em>—</em></span></div>
+              </div>
+            </div>
+            <div class="pmore">
+              <div class="acc"><span class="lab" style="margin-bottom:6px">ΜΑΘΕ ΠΕΡΙΣΣΟΤΕΡΑ</span><div>Ο ΠΑΡΑΓΩΓΟΣ <em>Ιστορία και περιοχή ›</em></div><div>ΣΕΡΒΙΡΙΣΜΑ &amp; ΦΥΛΑΞΗ <em>›</em></div><div>ΑΠΟ ΤΟΝ ΟΔΗΓΟ <em>Σχετικό άρθρο ›</em></div></div>
+              <div class="stack" style="gap:10px"><div class="rowh"><h5 style="font:600 1.05rem/1 var(--display);margin:0">Ταιριάζει με</h5></div>
+                <div class="pgrid">
+                  <div class="pc"><div class="ph"><svg class="btl" viewBox="0 0 40 140" style="color:#3c4a33"><use href="#wine"/></svg></div><b>Ίδιος παραγωγός</b><small>750ml</small></div>
+                  <div class="pc"><div class="ph"><svg class="btl" viewBox="0 0 40 140" style="color:#d7cf8e"><use href="#wine"/></svg></div><b>Ίδια ποικιλία</b><small>750ml</small></div>
+                  <div class="pc"><div class="ph"><svg class="btl" viewBox="0 0 40 140" style="color:#8a6a2a"><use href="#beer"/></svg></div><b>Deli που ταιριάζει</b><small>Βάζο</small></div>
+                </div>
+              </div>
+            </div>
+          </div></div>
+        </div>
+        <ul class="clean hint">
+          <li>Πάνω: προέλευση στα αριστερά, το μπουκάλι σε κύκλο στο χρώμα της κατηγορίας στη μέση, και δεξιά όσα χρειάζονται για αγορά. Από το reference με τον κόκκινο κύκλο.</li>
+          <li>Κάτω: σερβίρισμα και συνδυασμοί, γευστικό προφίλ σε μπάρες, και πίνακας τεχνικών, όπως στις καλές online κάβες. Τα πεδία που λείπουν απλώς δεν εμφανίζονται.</li>
+          <li>Στο τέλος, παραγωγός και φύλαξη σε ενότητες που ανοίγουν, και προτάσεις για cross-selling. Το τεχνικό δελτίο βγαίνει αυτόματα από τα ίδια πεδία.</li>
+          <li>* Το «Αποκλειστικό» μπαίνει μόνο όπου η NORDE το επιβεβαιώσει.</li>
+        </ul>
+      </div>
+
+      <!-- MOBILE -->
+      <div class="mockset">
+        <div class="mockhead"><h4>Στο κινητό</h4><span class="demo">ΕΝΔΕΙΚΤΙΚΟ</span></div>
+        <div class="phones">
+          <div class="phone cat">
+            <div class="ph2">
+              <span class="lab">ΚΡΑΣΙΑ</span><h6>Κόκκινα</h6>
+              <div class="chips"><span class="on">Όλα</span><span>Ξινόμαυρο</span><span>Αγιωργίτικο</span></div>
+              <div class="pgrid">
+                <div class="pc"><div class="ph"><svg class="btl" viewBox="0 0 40 140" style="color:#4a1420"><use href="#wine"/></svg></div><b>Ξινόμαυρο</b><div class="pf"><span class="price" style="font-size:.8rem">€ —,—</span><span class="add">+</span></div></div>
+                <div class="pc"><div class="ph"><span class="badge">DEAL</span><svg class="btl" viewBox="0 0 40 140" style="color:#5a1a28"><use href="#wine"/></svg></div><b>Αγιωργίτικο</b><div class="pf"><span class="price" style="font-size:.8rem">€ —,—</span><span class="add">+</span></div></div>
+              </div>
+            </div>
+            <div class="tabs"><span class="on">Αρχική</span><span>Αναζήτηση</span><span>Καλάθι</span><span>Λογαριασμός</span></div>
+          </div>
+          <div class="phone">
+            <div class="top"><span class="back">←</span><span class="lab">ΑΠΟΣΤΑΓΜΑΤΑ · ΤΣΙΠΟΥΡΟ</span><svg class="btl" viewBox="0 0 40 140" style="color:#c9d6db"><use href="#spirit"/></svg></div>
+            <div class="sheet">
+              <h6>Τσίπουρο χωρίς γλυκάνισο</h6>
+              <p>Δύο γραμμές για το απόσταγμα και τον παραγωγό.</p>
+              <div class="sizes"><span class="on" style="border-color:var(--sky);box-shadow:none">200ml</span><span style="border-color:#343d44">700ml</span></div>
+              <div class="row2"><span class="price">€ —,—</span><span class="btn">ΣΤΟ ΚΑΛΑΘΙ</span></div>
+              <div class="acc"><div>Ο ΠΑΡΑΓΩΓΟΣ <em>›</em></div><div>ΣΕΡΒΙΡΙΣΜΑ <em>›</em></div><div>ΤΑ ΤΕΧΝΙΚΑ <em>›</em></div></div>
+            </div>
+          </div>
+          <ul class="clean hint notes">
+            <li>Σχεδιάζουμε πρώτα για κινητό, γιατί από εκεί περιμένουμε τις περισσότερες επισκέψεις ιδιωτών. Θα το επιβεβαιώσουμε από τα στατιστικά του σημερινού site.</li>
+            <li>Στα αποστάγματα και στους καφέδες, το προϊόν πάνω και οι πληροφορίες σε κάρτα από κάτω, όπως στο reference του ουίσκι. Επιλογή μεγέθους με ένα πάτημα.</li>
+            <li>Μόνιμη μπάρα κάτω για αρχική, αναζήτηση και καλάθι.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g3">
+      <article class="card">
+        <h4>Σελίδα προϊόντος</h4>
+        <p>Ένα σταθερό πρότυπο για κάθε προϊόν: προέλευση, ποικιλία, τεχνικά, γευστικό προφίλ, συνδυασμοί, θερμοκρασία σερβιρίσματος. Από κάτω, προτάσεις από τον ίδιο παραγωγό και προϊόντα που ταιριάζουν, για cross-selling.</p>
+      </article>
+      <article class="card">
+        <h4>Σελίδα παραγωγού</h4>
+        <p>Η ιστορία του κτήματος ή της ζυθοποιίας, η περιοχή στον χάρτη, φωτογραφίες και όλα τα προϊόντα του. Εδώ φαίνεται καθαρά τι φέρνει η NORDE και από πού.</p>
+      </article>
+      <article class="card">
+        <h4>Οδηγός (άρθρα)</h4>
+        <p>Άρθρα που απαντούν σε πραγματικές ερωτήσεις, π.χ. ποιο κρασί με ποιο φαγητό ή πώς βγαίνει καλός espresso στο σπίτι. Βοηθούν στη Google και στις απαντήσεις των AI εργαλείων, και οδηγούν σε προϊόντα.</p>
+      </article>
+    </div>
+
+    <div class="sub">
+      <h3><small>1Γ</small>Η φόρμα για επαγγελματίες</h3>
+      <div class="flow">
+        <div><h4>Συμπληρώνει τη φόρμα</h4><p>Επωνυμία, τύπος επιχείρησης, περιοχή, τι τον ενδιαφέρει, αν θέλει δειγματισμό.</p><span class="who n">ΕΠΑΓΓΕΛΜΑΤΙΑΣ</span></div>
+        <div><h4>Καταγράφεται</h4><p>Τα στοιχεία μπαίνουν αυτόματα σε CRM, χωρίς χαρτάκια και χωρίς χαμένα emails.</p><span class="who t">ΑΥΤΟΜΑΤΑ</span></div>
+        <div><h4>Ειδοποίηση</h4><p>Ο υπεύθυνος της NORDE ειδοποιείται αμέσως. Ο επαγγελματίας παίρνει επιβεβαίωση.</p><span class="who t">ΑΥΤΟΜΑΤΑ</span></div>
+        <div><h4>Τηλέφωνο</h4><p>Ο υπεύθυνος καλεί και κλείνει ραντεβού ή δειγματισμό. Αν αργήσει, έρχεται υπενθύμιση.</p><span class="who n">NORDE</span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3><small>1Δ</small>Hosting, backup και ασφάλεια</h3>
+      <div class="grid g2">
+        <article class="card">
+          <h4>Δικός σας, δυνατός server στην Ελλάδα</h4>
+          <ul class="clean">
+            <li>Server σε ελληνικό datacenter, για γρήγορη φόρτωση στο ελληνικό κοινό. Τον πάροχο τον επιλέγουμε μαζί.</li>
+            <li>Πλήρης πρόσβαση: το site, ο κώδικας και τα δεδομένα ανήκουν στη NORDE.</li>
+            <li>Ταχύτητα: caching και βελτιστοποίηση εικόνων, γιατί ένα e-shop με εκατοντάδες φωτογραφίες ζει από την ταχύτητα.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h4>Τίποτα δεν χάνεται</h4>
+          <ul class="clean">
+            <li>Αυτόματα καθημερινά backup, αποθηκευμένα εκτός server, με δυνατότητα επαναφοράς.</li>
+            <li>SSL, firewall και παρακολούθηση ώστε να ξέρουμε πρώτοι αν πέσει το site.</li>
+            <li>Μεταφορά από το σημερινό site με ανακατευθύνσεις, ώστε να μη χαθούν όσα ήδη βρίσκει η Google.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3><small>1Ε</small>Στήσιμο ψηφιακών εργαλείων</h3>
+      <div class="grid g3">
+        <article class="card tool"><span class="ic">G</span><div><h4>Google Business Profile</h4><p>Διεκδίκηση ή δημιουργία προφίλ, κατηγορίες, ωράριο, φωτογραφίες, προϊόντα. Ενιαίο όνομα, διεύθυνση και τηλέφωνο σε όλους τους καταλόγους.</p></div></article>
+        <article class="card tool"><span class="ic">@</span><div><h4>Google Workspace</h4><p>Emails στο domain της NORDE. Κοινές θυρίδες, όπως info@, orders@ και b2b@, ώστε κάθε μήνυμα να το βλέπουν όσοι πρέπει.</p></div></article>
+        <article class="card tool"><span class="ic">IG</span><div><h4>Social media</h4><p>Στήσιμο και τακτοποίηση Instagram και Facebook, Meta Business Suite, σωστά στοιχεία και πρόσβαση για την ομάδα.</p></div></article>
+        <article class="card tool"><span class="ic">GA</span><div><h4>Μέτρηση στο site</h4><p>Google Analytics 4 και Tag Manager: βλέπουμε από πού έρχεται κάθε επισκέπτης, κάθε φόρμα και κάθε παραγγελία.</p></div></article>
+        <article class="card tool"><span class="ic">M</span><div><h4>Tracking από social και Google</h4><p>Meta Pixel με Conversions API και μετατροπές Google Ads, ώστε κάθε διαφήμιση να μετριέται σε επικοινωνίες και πωλήσεις.</p></div></article>
+        <article class="card tool"><span class="ic">SC</span><div><h4>Search Console &amp; Merchant Center</h4><p>Παρακολούθηση της θέσης στη Google και κατάλογος προϊόντων για Google Shopping.</p></div></article>
+      </div>
+      <p class="hint">Η μέτρηση στήνεται με διαχείριση συγκατάθεσης για cookies, σύμφωνα με τον GDPR.</p>
+    </div>
+
+    <div class="sub">
+      <h3><small>1ΣΤ</small>Πρόγραμμα υποστήριξης του site</h3>
+      <div class="care">
+        <article class="card tint">
+          <h4>Μηνιαία συνδρομή για υποστήριξη και επίλυση θεμάτων</h4>
+          <ul class="clean">
+            <li>Ενημερώσεις λογισμικού και ασφάλειας.</li>
+            <li>Έλεγχος των backup και της διαθεσιμότητας του server.</li>
+            <li>Επίλυση προβλημάτων με προτεραιότητα.</li>
+            <li>Μικρές αλλαγές σε περιεχόμενο και προϊόντα, μέσα σε όριο ωρών που συμφωνούμε.</li>
+            <li>Μηνιαίος έλεγχος ταχύτητας και ένας άνθρωπος για κάθε απορία.</li>
+          </ul>
+          <p>Νέες λειτουργίες και νέες σελίδες κοστολογούνται ξεχωριστά.</p>
+        </article>
+        <article class="card">
+          <h4>Πώς πληρώνεται</h4>
+          <p>Η χρέωση είναι μηνιαία και εξοφλείται ανά περίοδο:</p>
+          <div class="cycles" role="group" aria-label="Περίοδος πληρωμής">
+            <button type="button" id="cyc3" aria-pressed="true" data-m="3">Ανά τρίμηνο</button>
+            <button type="button" id="cyc6" aria-pressed="false" data-m="6">Ανά εξάμηνο</button>
+            <button type="button" id="cyc12" aria-pressed="false" data-m="12">Ανά έτος</button>
+          </div>
+          <p class="cyc-note" id="cycNote">Μία πληρωμή για 3 μήνες υποστήριξης.</p>
+          <p class="hint">Μηνιαία τιμή: €50 + ΦΠΑ.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3><small>1Ζ</small>Κόστος</h3>
+      <div class="grid g2">
+        <article class="card tint">
+          <h4>Κατασκευή του νέου site &amp; e-shop</h4>
+          <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px"><span style="text-decoration:line-through;color:var(--muted);font-size:1.1rem">€11.000</span><span style="font:600 2.2rem/1 var(--display);color:var(--accent)">€6.500</span><span style="color:var(--muted)">εφάπαξ + ΦΠΑ</span></div>
+          <p style="font-size:.85rem">Η διαγραμμένη τιμή είναι η κανονική. Η τιμή συνεργασίας ισχύει για τη NORDE λόγω της γνωριμίας και της κοινής μας πορείας.</p>
+          <p><b style="color:var(--ink)">Χρόνος ολοκλήρωσης: περίπου 3 με 4 μήνες.</b></p>
+          <ul class="clean">
+            <li>Σχεδιασμός και κατασκευή, με τη δομή και τις σελίδες που περιγράφουμε παραπάνω.</li>
+            <li>Κείμενα για κάθε προϊόν του καταλόγου, από την πληροφορία που συλλέγει η ομάδα σας.</li>
+            <li>Ξεχωριστός χώρος για άρθρα (Οδηγός), για να ξεκινήσει η αρθρογραφία.</li>
+            <li>Ξεχωριστός χώρος για επαγγελματίες, με φόρμα που φέρνει κάθε ενδιαφέρον κατευθείαν για επικοινωνία.</li>
+            <li>Αλλαγές στις εικόνες της αρχικής κατά παραγγελία, ανάλογα με το τι θέλετε να προβάλετε κάθε φορά.</li>
+            <li>Μεταφορά από το σημερινό site με ανακατευθύνσεις.</li>
+          </ul>
+        </article>
+        <div class="stack">
+          <article class="card">
+            <h4>Αρχικό στήσιμο μέτρησης &amp; tracking</h4>
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px"><span style="font:600 2.2rem/1 var(--display);color:var(--accent)">€750</span><span style="color:var(--muted)">εφάπαξ + ΦΠΑ</span></div>
+            <p>Google Analytics 4, Tag Manager, Meta Pixel με Conversions API, μετατροπές Google Ads, Search Console και Merchant Center, με διαχείριση συγκατάθεσης για cookies.</p>
+          </article>
+          <article class="card">
+            <h4>Hosting, backup &amp; ασφάλεια</h4>
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px"><span style="font:600 2.2rem/1 var(--display);color:var(--accent)">€40</span><span style="color:var(--muted)">/ μήνα + ΦΠΑ</span></div>
+            <p>Δικός σας server στην Ελλάδα, καθημερινά backup εκτός server, SSL, firewall και παρακολούθηση.</p>
+          </article>
+          <article class="card">
+            <h4>Υποστήριξη του site</h4>
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px"><span style="font:600 2.2rem/1 var(--display);color:var(--accent)">€50</span><span style="color:var(--muted)">/ μήνα + ΦΠΑ</span></div>
+            <p>Ενημερώσεις, επίλυση θεμάτων και μικρές αλλαγές, όπως περιγράφει το πρόγραμμα υποστήριξης (1ΣΤ). Πληρώνεται ανά τρίμηνο, εξάμηνο ή έτος.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PILLAR 2 ============ -->
+<section class="band p2" id="ads">
+  <div class="wrap">
+    <div class="phead">
+      <span class="pill"><b>2</b><span class="eyebrow">ΠΥΛΩΝΑΣ 2 · ΔΙΑΦΗΜΙΣΗ &amp; EMAIL</span></span>
+      <h2>Φέρνουμε τον επαγγελματία στο τηλέφωνό σας και τον ιδιώτη στο καλάθι</h2>
+      <p class="lead">Η διαφήμιση δουλεύει σαν πωλητής που πάει πόρτα-πόρτα, μόνο που το κάνει online, σε όλη την περιοχή μαζί και με πολύ μικρότερο κόστος. Όποιος ενδιαφέρεται αφήνει τα στοιχεία του, και ο πωλητής σας παίρνει μια λίστα με ανθρώπους που ήδη σας έχουν δει και ξέρουν τι φέρνετε. Δεν κάνει κρύο τηλεφώνημα. Συνεχίζει μια κουβέντα που έχει ήδη ξεκινήσει.</p>
+    </div>
+
+    <div class="sub">
+      <h3>Πώς δουλεύουν μαζί η διαφήμιση και το περιεχόμενο</h3>
+      <div class="flow">
+        <div><h4>Περιεχόμενο</h4><p>Παραγωγοί, μηχανές, άνθρωποι, αποκλειστικά προϊόντα.</p><span class="who t">ΠΥΛΩΝΑΣ 3</span></div>
+        <div><h4>Προβολή στα social</h4><p>Οργανικά, σε Instagram, Facebook και LinkedIn.</p><span class="who t">ΠΥΛΩΝΑΣ 3</span></div>
+        <div><h4>Ενίσχυση με διαφήμιση</h4><p>Το καλύτερο περιεχόμενο φτάνει σε όσους πρέπει.</p><span class="who t">ΠΥΛΩΝΑΣ 2</span></div>
+        <div><h4>Αφήνει στοιχεία</h4><p>Ο επαγγελματίας ζητά επικοινωνία.</p><span class="who n">ΕΠΑΓΓΕΛΜΑΤΙΑΣ</span></div>
+        <div><h4>Λίστα για τον πωλητή</h4><p>Όλα στο CRM, με το τι ενδιαφέρει τον καθένα.</p><span class="who t">ΑΥΤΟΜΑΤΑ</span></div>
+        <div><h4>Νέος πελάτης</h4><p>Ο πωλητής σας καλεί και κλείνει τη συνεργασία.</p><span class="who n">NORDE</span></div>
+        <div><h4>Email &amp; επόμενη παραγγελία</h4><p>Η σχέση συνεχίζεται. Η λίστα πελατών γυρίζει πίσω στη διαφήμιση και τη βελτιώνει.</p><span class="who t">ΠΥΛΩΝΑΣ 2</span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3><small>2Α</small>Τέσσερις στόχοι, με σειρά</h3>
+      <div class="grid g2">
+        <article class="card"><h4>1. Επαγγελματίες που ζητούν επικοινωνία · από τον πρώτο μήνα</h4><p>Ξεκινάμε πριν βγει το νέο site. Η φόρμα ανοίγει μέσα στη διαφήμιση ή στη σελίδα για επαγγελματίες, οπότε δεν περιμένουμε το e-shop.</p></article>
+        <article class="card"><h4>2. Αναγνωρισιμότητα · παράλληλα</h4><p>Όσο περισσότεροι επαγγελματίες και ιδιώτες στην Ήπειρο ξέρουν τη NORDE, τόσο φθηνότερα έρχεται κάθε επικοινωνία και τόσο πιο εύκολα κλείνει ο πωλητής.</p></article>
+        <article class="card"><h4>3. Πωλήσεις σε ιδιώτες · από το launch του e-shop</h4><p>Τα προϊόντα εμφανίζονται στη Google και στα social με φωτογραφία και τιμή, και αγοράζονται με ένα κλικ.</p></article>
+        <article class="card"><h4>4. Εταιρείες · εταιρικά δώρα και πακέτα</h4><p>Μια νέα υπηρεσία που μπορεί να προσφέρει η NORDE σε επιχειρήσεις, κυρίως στην Ήπειρο: δώρα για συνεργάτες και προσωπικό, ή σταθερή προμήθεια για το γραφείο. Την προβάλλουμε μέσα από το LinkedIn, το email και το site. Πώς θα στήνεται κάθε σεζόν το ορίζουμε μαζί.</p></article>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3><small>2Β</small>Ο ρόλος κάθε καναλιού</h3>
+      <div class="grid g2">
+        <article class="card">
+          <h4>Meta (Facebook &amp; Instagram): το βασικό κανάλι για επαγγελματίες και αναγνωρισιμότητα</h4>
+          <ul class="clean">
+            <li><b>Φόρμες μέσα στη διαφήμιση:</b> ο επαγγελματίας αφήνει στοιχεία χωρίς να φύγει από το Instagram.</li>
+            <li><b>Το περιεχόμενο κάνει τη στόχευση.</b> Ένα βίντεο για espresso και ρύθμιση μηχανής το σταματούν όσοι δουλεύουν καφέ. Ένα βίντεο για λίστα κρασιών το σταματούν όσοι έχουν εστιατόριο. Στοχεύουμε με περιοχή και ενδιαφέροντα, και το ίδιο το μήνυμα ξεχωρίζει τον σωστό επαγγελματία.</li>
+            <li><b>Remarketing:</b> υπενθύμιση σε όσους είδαν τα βίντεο ή μπήκαν στο site.</li>
+            <li><b>Μετά το launch:</b> διαφημίσεις καταλόγου για το e-shop.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h4>Google: όταν κάποιος ήδη ψάχνει</h4>
+          <ul class="clean">
+            <li><b>Καμπάνια αναζήτησης:</b> όποιος ψάχνει κάβα, ποτά, κρασιά ή καφέ στην περιοχή, ή το όνομα NORDE και τα brands σας, βρίσκει πρώτη τη NORDE.</li>
+            <li><b>Performance Max &amp; Shopping από το launch:</b> τα προϊόντα του e-shop εμφανίζονται μέσω Google Merchant Center στις αναζητήσεις, στο Shopping και στο YouTube.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3><small>2Γ</small>Τι προσφέρουμε για να ζητήσουν επικοινωνία</h3>
+      <div class="grid g2">
+        <article class="card tint">
+          <h4>Στον επαγγελματία</h4>
+          <p>Μια διαφήμιση φέρνει επικοινωνίες όταν δίνει έναν λόγο να απαντήσει κανείς. Επιλέγουμε μαζί μία ή δύο προτάσεις και δοκιμάζουμε ποια δουλεύει καλύτερα:</p>
+          <ul class="clean">
+            <li>δειγματισμός στο μαγαζί του</li>
+            <li>δοκιμή μηχανής καφέ</li>
+            <li>γευσιγνωσία για τη λίστα κρασιών του</li>
+          </ul>
+        </article>
+        <article class="card tint">
+          <h4>Στις εταιρείες</h4>
+          <p>Σχεδιάζουμε μαζί την υπηρεσία των εταιρικών δώρων, για παράδειγμα:</p>
+          <ul class="clean">
+            <li>έτοιμα πακέτα (κρασί, απόσταγμα, καφές, deli) σε διάφορα επίπεδα τιμής</li>
+            <li>προσαρμογή με κάρτα ή λογότυπο</li>
+            <li>παράδοση σε πολλές διευθύνσεις</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3><small>2Δ</small>Τα δικά σας δεδομένα στη διαφήμιση</h3>
+      <div class="grid g3">
+        <article class="card"><h4>Λίστα υπαρχόντων πελατών</h4><p>Για να μην πληρώνουμε για όσους ήδη ψωνίζουν από εσάς, και για να βρίσκουμε επιχειρήσεις που τους μοιάζουν.</p></article>
+        <article class="card"><h4>Επισκέπτες του site και θεατές των βίντεο</h4><p>Για remarketing σε όσους έχουν ήδη δείξει ενδιαφέρον.</p></article>
+        <article class="card"><h4>Τακτική ανανέωση</h4><p>Η λίστα ανανεώνεται τακτικά, ώστε η στόχευση να βελτιώνεται κάθε μήνα.</p></article>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3><small>2Ε</small>Τι λέμε και πού</h3>
+      <div class="tbl" role="region" aria-label="Γεωγραφική στόχευση" tabindex="0">
+        <table>
+          <thead><tr><th>ΘΕΜΑ</th><th>ΠΕΡΙΟΧΗ</th><th>ΣΕ ΠΟΙΟΝ</th></tr></thead>
+          <tbody>
+            <tr><td>Καφές &amp; μηχανές για επαγγελματίες</td><td>Ιωάννινα και Θεσπρωτία, όπου ισχύει η αποκλειστικότητα στον καφέ</td><td>Καφέ, εστιατόρια, ξενοδοχεία</td></tr>
+            <tr><td>Κρασιά, μπύρες και ούζα με αποκλειστικότητα</td><td>Όλη η Ήπειρος</td><td>Εστιατόρια, bars, ξενοδοχεία, κάβες</td></tr>
+            <tr><td>Νέες περιοχές</td><td>Όπου φτάνει σταθερά η παράδοση. Για τον καφέ, μόνο εφόσον επιβεβαιωθεί ότι επιτρέπεται εκτός Ιωαννίνων και Θεσπρωτίας</td><td>Επαγγελματίες HoReCa</td></tr>
+            <tr><td>E-shop</td><td>Όλη η Ελλάδα</td><td>Ιδιώτες</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3><small>2ΣΤ</small>Email marketing: ένα δίχτυ που δεν αφήνει κανέναν να χαθεί</h3>
+      <p class="hint">Ξεκινά μαζί με το e-shop. Κάθε επαφή που μαζεύουμε μπαίνει σε ομάδα: νέος επαγγελματίας, υπάρχων πελάτης, εταιρεία, αγοραστής του e-shop, εγγεγραμμένος στο newsletter. Από εκεί δέχεται αυτόματα τα emails που του ταιριάζουν, ανάλογα με το τι έχει επιλέξει, είτε για την πρώτη αγορά είτε για να ξαναγοράσει.</p>
+      <div class="tbl" role="region" aria-label="Ροές email" tabindex="0">
+        <table>
+          <thead><tr><th>ΟΜΑΔΑ</th><th>ΤΙ ΛΑΜΒΑΝΕΙ</th><th>ΠΟΤΕ ΞΕΚΙΝΑ</th></tr></thead>
+          <tbody>
+            <tr><td>Νέος επαγγελματίας</td><td>Καλωσόρισμα, τι φέρνει η NORDE στην κατηγορία που τον ενδιαφέρει, υπενθύμιση για δειγματισμό</td><td>Με το e-shop</td></tr>
+            <tr><td>Υπάρχων επαγγελματίας πελάτης</td><td>Νέες αφίξεις, αποκλειστικά προϊόντα, deals, γνώση για τη δουλειά του</td><td>Με το e-shop</td></tr>
+            <tr><td>Εταιρείες</td><td>Τα εταιρικά πακέτα πριν από κάθε σεζόν δώρων, υπενθύμιση σε όσους αγόρασαν στο παρελθόν</td><td>Με το e-shop, μόλις στηθεί η υπηρεσία</td></tr>
+            <tr><td>Ιδιώτης που αγόρασε</td><td>Ευχαριστώ, οδηγός σερβιρίσματος, πρόταση για κάτι που ταιριάζει, υπενθύμιση όταν πάει να τελειώσει ο καφές</td><td>Από το launch</td></tr>
+            <tr><td>Καλάθι που έμεινε</td><td>Υπενθύμιση με τα προϊόντα του</td><td>Από το launch</td></tr>
+            <tr><td>Newsletter</td><td>Μηνιαίο, χωριστό για επαγγελματίες και ιδιώτες</td><td>Με το e-shop</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint">Τα emails στέλνονται μόνο με συγκατάθεση και πάντα με επιλογή διαγραφής, σύμφωνα με τον GDPR.</p>
+    </div>
+
+    <div class="sub">
+      <h3><small>2Ζ</small>Πώς μετράμε</h3>
+      <div class="grid g2">
+        <article class="card"><h4>Επαγγελματίες</h4><ul class="clean"><li>Κόστος ανά επικοινωνία</li><li>Κόστος ανά νέο πελάτη που κλείνει</li><li>Ποιες περιοχές και ποια μηνύματα φέρνουν πελάτες</li></ul></article>
+        <article class="card"><h4>Αναγνωρισιμότητα</h4><ul class="clean"><li>Απήχηση στην Ήπειρο</li><li>Επισκέψεις στο site</li></ul></article>
+        <article class="card"><h4>Ιδιώτες · από το launch</h4><ul class="clean"><li>Πωλήσεις και έσοδα</li><li>Conversion rate</li><li>Κόστος ανά πώληση</li></ul></article>
+        <article class="card"><h4>Εταιρείες</h4><ul class="clean"><li>Αιτήματα για προσφορά</li><li>Αξία παραγγελιών</li><li>Εταιρείες που ξαναπαραγγέλνουν</li></ul></article>
+      </div>
+      <ul class="clean hint">
+        <li>Για να μετράμε το κόστος ανά νέο πελάτη, σημειώνετε στο CRM ποια επικοινωνία έκλεισε. Αυτή την πληροφορία τη στέλνουμε πίσω στη Google και στη Meta, ώστε να ψάχνουν άτομα που γίνονται πελάτες και όχι απλώς άτομα που συμπληρώνουν φόρμες.</li>
+        <li>Δοκιμή και κλιμάκωση: τους πρώτους 2–3 μήνες δοκιμάζουμε μηνύματα, προτάσεις και περιοχές με συγκρατημένο προϋπολογισμό. Μετά ρίχνουμε τα χρήματα σε ό,τι φέρνει πελάτες.</li>
+        <li>Οι διαφημίσεις για αλκοόλ προβάλλονται μόνο σε ενήλικες, σύμφωνα με τους κανόνες της Google, της Meta και της ελληνικής νομοθεσίας.</li>
+      </ul>
+    </div>
+
+    <div class="sub">
+      <h3><small>2Η</small>Κόστος · φάση επαγγελματιών</h3>
+      <div class="grid g2">
+        <article class="card tint">
+          <h4>Διαχείριση διαφήμισης</h4>
+          <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px"><span style="text-decoration:line-through;color:var(--muted);font-size:1.1rem">€450</span><span style="font:600 2.2rem/1 var(--display);color:var(--accent)">€250</span><span style="color:var(--muted)">/ μήνα + ΦΠΑ</span></div><p style="font-size:.85rem">Η διαγραμμένη τιμή είναι η κανονική. Η τιμή συνεργασίας ισχύει για τη NORDE λόγω της γνωριμίας και της κοινής μας πορείας.</p>
+          <ul class="clean">
+            <li>Meta lead ads για επαγγελματίες</li>
+            <li>Καμπάνια αναζήτησης στο Google με επιλεγμένα keywords</li>
+            <li>Στήσιμο καμπανιών και καθημερινή βελτιστοποίηση</li>
+            <li>Μηνιαία αναφορά για τον μήνα που πέρασε</li>
+          </ul>
+          <p style="font-size:.85rem;border-top:1px solid var(--line);padding-top:10px">* Όταν ενεργοποιηθεί το e-shop και ξεκινήσουν διαφημίσεις για πωλήσεις λιανικής, η τιμή διαμορφώνεται σε ένα ενιαίο πακέτο διαχείρισης, για διαφήμιση τόσο σε επαγγελματίες όσο και σε ιδιώτες.</p>
+        </article>
+        <article class="card">
+          <h4>Τι δεν περιλαμβάνεται</h4>
+          <ul class="clean">
+            <li><b>Ο προϋπολογισμός διαφήμισης:</b> πληρώνεται απευθείας στη Meta και στη Google.</li>
+            <li><b>Τα δημιουργικά:</b> βγαίνουν από την παραγωγή περιεχομένου του πυλώνα 3, χωρίς επιπλέον χρέωση.</li>
+            <li><b>Email marketing και διαφήμιση για ιδιώτες:</b> ξεκινούν μαζί με το e-shop και κοστολογούνται τότε.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+
+    <div class="note">
+      <h4>Με ειλικρίνεια</h4>
+      <p>Οι επαγγελματίες σε κάθε περιοχή είναι συγκεκριμένοι, οπότε δεν υποσχόμαστε αριθμό επικοινωνιών. Υποσχόμαστε ότι κάθε μήνα θα ξέρετε πόσο κόστισε κάθε νέος πελάτης και τι αλλάζουμε. Ο προϋπολογισμός διαφήμισης πληρώνεται απευθείας στη Google και στη Meta, ξεχωριστά από την αμοιβή μας.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PILLAR 3 ============ -->
+<section class="band p3" id="social">
+  <div class="wrap">
+    <div class="phead">
+      <span class="pill"><b>3</b><span class="eyebrow">ΠΥΛΩΝΑΣ 3 · SOCIAL MEDIA &amp; ΠΕΡΙΕΧΟΜΕΝΟ</span></span>
+      <h2>Δείχνουμε γιατί αξίζει να δουλέψει κανείς με τη NORDE</h2>
+      <p class="lead">Οι άνθρωποι, οι παραγωγοί, οι μηχανές, τα προϊόντα που στην Ήπειρο έχετε μόνο εσείς. Τη στρατηγική τη συμφωνούμε μαζί, και από εκεί αναλαμβάνουμε όλη την παραγωγή μέχρι το τελικό αποτέλεσμα, που εγκρίνετε πριν ανέβει. Το ίδιο υλικό τροφοδοτεί τα social, τις διαφημίσεις και τα emails.</p>
+    </div>
+
+    <div class="sub">
+      <h3><small>3Α</small>Κανάλια και σε ποιον μιλάει το καθένα</h3>
+      <div class="grid g2">
+        <article class="card">
+          <h4>Instagram &amp; Facebook: ένα προφίλ, δύο γραμμές περιεχομένου</h4>
+          <ul class="clean">
+            <li><b>Για τον επαγγελματία:</b> μηχανές και service, λίστα κρασιών, νέες αφίξεις, αποκλειστικά προϊόντα. Πρακτικά, από γνώστη σε γνώστη.</li>
+            <li><b>Για τον ιδιώτη:</b> προέλευση, παραγωγοί, απόλαυση, ιδέες για δώρο. Και μετά το launch, κατευθείαν στο e-shop.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h4>LinkedIn: το εταιρικό προφίλ της NORDE</h4>
+          <ul class="clean">
+            <li>Περιεχόμενο για επαγγελματίες και εταιρείες: είκοσι χρόνια στην αγορά, παραγωγοί και αποκλειστικότητες, η ομάδα.</li>
+            <li>Εδώ προβάλλονται τα εταιρικά δώρα και πακέτα.</li>
+            <li>Μιλάει και το πρόσωπο της NORDE, σε πιο επαγγελματικό ύφος.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3><small>3Β</small>Το πρόσωπο της NORDE</h3>
+      <div class="card tint">
+        <p>Ένας άνθρωπος που μιλά στην κάμερα και γίνεται η φωνή του brand, ιδανικά από την ομάδα σας. Τον επιλέγουμε μαζί, και τον προετοιμάζουμε με φωτογράφιση, βιντεογράφιση και καθοδήγηση στα γυρίσματα. Τα βίντεο με πρόσωπο είναι αυτά που ο επαγγελματίας θυμάται όταν τον πάρει τηλέφωνο ο πωλητής σας.</p>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3><small>3Γ</small>Σταθερές σειρές</h3>
+      <p class="hint">Επαναλαμβανόμενες ενότητες με δικό τους όνομα, ώστε το κοινό να τις αναγνωρίζει και να τις περιμένει.</p>
+      <div class="grid g3">
+        <article class="card tint"><h4>«Στο κτήμα»</h4><p>Επισκέψεις σε οινοποιεία και ζυθοποιεία: ποιος το φτιάχνει, πώς, τι το κάνει ξεχωριστό.</p></article>
+        <article class="card tint"><h4>«Η μηχανή»</h4><p>Στήσιμο, ρύθμιση, συντήρηση, σωστό espresso. Δείχνει την υποστήριξη που παίρνει ο επαγγελματίας.</p></article>
+        <article class="card tint"><h4>«Τι έφτασε»</h4><p>Νέες αφίξεις και deals.</p></article>
+        <article class="card tint"><h4>«Μόνο από τη NORDE»</h4><p>Τα προϊόντα που στην Ήπειρο φέρνετε μόνο εσείς. Χτίζει τη θέση σας στην περιοχή.</p></article>
+        <article class="card tint"><h4>«Στα μαγαζιά μας»</h4><p>Καφέ και εστιατόρια της Ηπείρου που δουλεύουν προϊόντα NORDE, με tag στο μαγαζί. Ο πελάτης σας κερδίζει προβολή, και ο υποψήφιος βλέπει ποιοι άλλοι σας εμπιστεύονται.</p></article>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3><small>3Δ</small>Κάθε γύρισμα, τρεις χρήσεις</h3>
+      <div class="grid g3">
+        <article class="card"><h4>Social</h4><p>Reels και φωτογραφίες για Instagram, Facebook και LinkedIn.</p></article>
+        <article class="card"><h4>Διαφήμιση</h4><p>Σύντομες εκδοχές για τις διαφημίσεις του πυλώνα 2.</p></article>
+        <article class="card"><h4>Email &amp; site</h4><p>Υλικό για τα emails, τις σελίδες παραγωγών και τα άρθρα.</p></article>
+      </div>
+      <p class="hint">Το μηνιαίο πακέτο περιλαμβάνει 12 αναρτήσεις, βίντεο και στατικές, σε Instagram, Facebook και LinkedIn.</p>
+    </div>
+
+    <div class="sub">
+      <h3><small>3Ε</small>Πώς δουλεύουμε</h3>
+      <div class="flow">
+        <div><h4>Στρατηγική</h4><p>Στόχοι, κοινά, θεματικές, ρυθμός αναρτήσεων.</p><span class="who m">ΜΑΖΙ</span></div>
+        <div><h4>Concepts &amp; πλάνο</h4><p>Μηνιαίο πλάνο με ιδέες και προγραμματισμό γυρισμάτων.</p><span class="who t">THYNK</span></div>
+        <div><h4>Έγκριση πλάνου</h4><p>Το βλέπετε και το κλειδώνουμε.</p><span class="who n">NORDE</span></div>
+        <div><h4>Συντονισμός</h4><p>Ραντεβού με παραγωγούς, φωτογράφους, βιντεογράφους.</p><span class="who t">THYNK</span></div>
+        <div><h4>Λήψη</h4><p>Γυρίσματα στη NORDE και στους παραγωγούς.</p><span class="who t">THYNK</span></div>
+        <div><h4>Κείμενα &amp; editing</h4><p>Copy, captions, μοντάζ, μουσική, υπότιτλοι.</p><span class="who t">THYNK</span></div>
+        <div><h4>Τελική έγκριση</h4><p>Τίποτα δεν ανεβαίνει χωρίς το οκ σας.</p><span class="who n">NORDE</span></div>
+        <div><h4>Ανάρτηση &amp; μέτρηση</h4><p>Ανέβασμα, απαντήσεις, μηνιαία αναφορά.</p><span class="who t">THYNK</span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3><small>3ΣΤ</small>Ποιος κάνει τι</h3>
+      <div class="grid g2">
+        <article class="card">
+          <h4>Από τη Thynk</h4>
+          <ul class="clean">
+            <li>Υπεύθυνος στρατηγικής και συντονισμού, ένα σημείο επικοινωνίας.</li>
+            <li>Άνθρωπος για κείμενα και περιεχόμενο.</li>
+            <li>Φωτογράφοι και βιντεογράφοι συνεργάτες, που συντονίζουμε εμείς.</li>
+            <li>Editing και τελική επεξεργασία.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h4>Από τη NORDE</h4>
+          <ul class="clean">
+            <li>Συμμετοχή στη στρατηγική.</li>
+            <li>Ένας άνθρωπος για εγκρίσεις και πληροφορίες προϊόντων.</li>
+            <li>Επαφή με τους παραγωγούς για τις επισκέψεις.</li>
+            <li>Το πρόσωπο της NORDE στην κάμερα.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3><small>3Ζ</small>Πώς μετράμε</h3>
+      <div class="card">
+        <ul class="clean">
+          <li>Επισκέψεις στο site από τα social</li>
+          <li>Νέοι ακόλουθοι</li>
+          <li>Αλληλεπίδραση: σχόλια, μηνύματα, αποθηκεύσεις</li>
+          <li>Κοινοποιήσεις</li>
+          <li>Απήχηση στην Ήπειρο</li>
+        </ul>
+        <p>Μηνιαία αναφορά, μαζί με τη διαφήμιση.</p>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3><small>3Η</small>Αρθρογραφία στο site και στα μέσα ενημέρωσης</h3>
+      <div class="grid g2">
+        <article class="card tint">
+          <h4>Άρθρα στον Οδηγό του site</h4>
+          <p>Τακτικά άρθρα για όσους δουλεύουν σε καφέ, εστιατόρια, bars και ξενοδοχεία, γραμμένα από γνώστη σε γνώστη, και για τον ιδιώτη που αγαπά τον καφέ και το κρασί. Ανεβαίνουν στον Οδηγό του νέου site και οδηγούν σε προϊόντα και στη φόρμα για επαγγελματίες.</p>
+          <ul class="clean">
+            <li>Πώς στήνεις λίστα κρασιών για το μαγαζί σου</li>
+            <li>Συντήρηση της μηχανής espresso: τι κάνεις κάθε μέρα</li>
+            <li>Μπύρες από μικροζυθοποιίες: πώς τις βάζεις στον κατάλογο</li>
+          </ul>
+          <p style="font-size:.85rem">Τα θέματα είναι ενδεικτικά.</p>
+        </article>
+        <article class="card tint">
+          <h4>Άρθρα σε τοπικά και άλλα μέσα ενημέρωσης</h4>
+          <p>Δημοσιεύσεις σε τοπικά μέσα της Ηπείρου και σε μέσα με ευρύτερο κοινό, για τη NORDE, τους παραγωγούς της και τα προϊόντα που φέρνει. Χτίζουν αναγνωρισιμότητα και αξιοπιστία έξω από τα δικά μας κανάλια.</p>
+        </article>
+      </div>
+      <div class="grid g2">
+        <article class="card">
+          <h4>Άρθρα που φέρνουν πωλήσεις</h4>
+          <p>Επιλεγμένα άρθρα, στο site και στα μέσα, τα προωθούμε με διαφήμιση που φέρνει τον αναγνώστη μέσα στο άρθρο. Αυτά τα άρθρα γράφονται ώστε να οδηγούν σε πώληση: στη φόρμα για τον επαγγελματία, στο καλάθι για τον ιδιώτη.</p>
+          <p>Τα υπόλοιπα άρθρα μένουν ενημερωτικά, για να χτίζουν γνώση και εμπιστοσύνη.</p>
+        </article>
+        <article class="card">
+          <h4>Γιατί αξίζει</h4>
+          <ul class="clean">
+            <li><b>Google και AI:</b> τα άρθρα κάνουν τη NORDE να εμφανίζεται όταν κάποιος ψάχνει απάντηση, στη Google και στα εργαλεία AI.</li>
+            <li><b>Ένα άρθρο, πολλές χρήσεις:</b> το ίδιο υλικό γίνεται post στο LinkedIn και στα social, και θέμα στα emails.</li>
+            <li><b>Εμπιστοσύνη:</b> δείχνει ότι η NORDE ξέρει τη δουλειά του πελάτη της.</li>
+          </ul>
+          <p><b style="color:var(--ink)">Επιπρόσθετο, ξεκινά μετά τον 5ο μήνα και κοστολογείται χωριστά.</b></p>
+        </article>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3><small>3Θ</small>Κόστος</h3>
+      <div class="grid g2">
+        <article class="card tint">
+          <h4>Social media management &amp; παραγωγή περιεχομένου</h4>
+          <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px"><span style="text-decoration:line-through;color:var(--muted);font-size:1.1rem">€800</span><span style="font:600 2.2rem/1 var(--display);color:var(--accent)">€450</span><span style="color:var(--muted)">/ μήνα + ΦΠΑ</span></div><p style="font-size:.85rem">Η διαγραμμένη τιμή είναι η κανονική. Η τιμή συνεργασίας ισχύει για τη NORDE λόγω της γνωριμίας και της κοινής μας πορείας.</p>
+          <ul class="clean">
+            <li>12 αναρτήσεις τον μήνα (3 την εβδομάδα), βίντεο και στατικές</li>
+            <li>Instagram, Facebook και LinkedIn</li>
+            <li>Στρατηγική, concepts, κείμενα, συντονισμός και λήψη, editing, ανάρτηση</li>
+            <li>Μηνιαία αναφορά</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h4>Συνολική εικόνα</h4>
+          <p>Το κόστος και των τριών ενοτήτων μαζί, εφάπαξ και μηνιαίο, βρίσκεται στην ενότητα 4.</p>
+          <a href="#plan" style="font-weight:600;text-decoration:none;margin-top:auto">Δες τη συνολική κοστολόγηση →</a>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXTRA ============ -->
+<section class="band px" id="extra">
+  <div class="wrap">
+    <div class="phead">
+      <span class="eyebrow">ΠΡΟΣ ΣΥΖΗΤΗΣΗ</span>
+      <h2>Επιπλέον σημεία για να τα τοποθετήσουμε</h2>
+      <p class="lead">Δεν είναι όλα για τώρα. Κάποια είναι προϋποθέσεις για να δουλέψουν οι τρεις πυλώνες, άλλα ανήκουν σε επόμενη φάση.</p>
+    </div>
+    <div class="grid g3 extra">
+      <article class="card"><h4>CRM για τις επικοινωνίες</h4><p>Το σύστημα που κρατά κάθε επαγγελματία που ζήτησε επικοινωνία και ειδοποιεί τον υπεύθυνο. Χωρίς αυτό, η διαφήμιση του πυλώνα 2 φέρνει επαφές που χάνονται.</p></article>
+      <article class="card"><h4>Φωτογράφιση προϊόντων</h4><p>Καθαρές, ομοιόμορφες φωτογραφίες για το e-shop: νέα φωτογράφιση για τα κύρια προϊόντα, επεξεργασία των υπαρχουσών για τα υπόλοιπα. Από αυτό κρίνεται η εικόνα του site.</p></article>
+      <article class="card"><h4>Περιεχόμενο προϊόντων &amp; άρθρα</h4><p>Γράψιμο και ανέβασμα περιγραφών από το υλικό που συλλέγει η ομάδα σας, και τακτική παραγωγή άρθρων για τον Οδηγό.</p></article>
+      <article class="card"><h4>Email marketing</h4><p>Newsletter για επαγγελματίες με νέες αφίξεις και προσφορές. Για το e-shop, αυτόματα emails για καλάθι που έμεινε και μετά την αγορά.</p></article>
+      <article class="card"><h4>Μεταφορικά για ιδιώτες</h4><p>Κόστος αποστολής, όριο για δωρεάν μεταφορικά, και courier για τα μικρά δέματα όπως καφές και αξεσουάρ. Κρίνει αν το e-shop θα φέρνει παραγγελίες.</p></article>
+      <article class="card"><h4>Νομικά για online πώληση αλκοόλ</h4><p>Επιβεβαίωση ηλικίας, όροι αγοράς, πολιτική απορρήτου. Να ελεγχθούν με τον νομικό ή τον λογιστή σας.</p></article>
+      <article class="card"><h4>Τιμολόγηση &amp; απόθεμα</h4><p>Έκδοση παραστατικών με myDATA και ενημέρωση αποθέματος από το Pegasus. Η λύση εξαρτάται από το τι επιτρέπει η εγκατάστασή σας.</p></article>
+      <article class="card"><h4>Κριτικές πελατών</h4><p>Συλλογή κριτικών στη Google και στο site, με απαντήσεις από τη NORDE.</p></article>
+      <article class="card"><h4>Αυτοματισμοί για υπάρχοντες πελάτες</h4><p>Υπενθυμίσεις επαναπαραγγελίας και ειδοποίηση όταν ένας πελάτης σταματά να παραγγέλνει. Για επόμενη φάση.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLAN ============ -->
+<section class="band" id="plan">
+  <div class="wrap">
+    <div class="phead">
+      <span class="eyebrow">ΣΕΙΡΑ ΥΛΟΠΟΙΗΣΗΣ</span>
+      <h2>Ξεκινάμε από ό,τι φέρνει αποτέλεσμα γρήγορα</h2>
+      <p class="lead">Το νέο e-shop θέλει 4 με 5 μήνες. Μέχρι τότε δεν περιμένουμε: τα θεμέλια, τα social και η διαφήμιση για επαγγελματίες ξεκινούν από τον πρώτο μήνα.</p>
+    </div>
+    <div class="phases">
+      <article class="card phase"><span class="when">ΕΒΔΟΜΑΔΕΣ 1–4</span><h4>Θεμέλια</h4><ul class="clean"><li><span class="tag t1">1</span>Workspace, Google Business Profile, μέτρηση</li><li><span class="tag t1">1</span>Σελίδα και φόρμα για επαγγελματίες, CRM</li><li><span class="tag t3">3</span>Στρατηγική, στήσιμο social, φωτογράφιση ανθρώπων</li></ul></article>
+      <article class="card phase"><span class="when">ΜΗΝΕΣ 1–3</span><h4>Σε κίνηση</h4><ul class="clean"><li><span class="tag t2">2</span>Διαφήμιση για επαγγελματίες σε Google και Meta</li><li><span class="tag t3">3</span>Τακτικό περιεχόμενο, επισκέψεις σε παραγωγούς</li><li><span class="tag t1">1</span>Σχεδιασμός και χτίσιμο site, συλλογή προϊόντων</li></ul></article>
+      <article class="card phase"><span class="when">ΜΗΝΕΣ 3–5</span><h4>Launch του e-shop</h4><ul class="clean"><li><span class="tag t1">1</span>Δημοσίευση, μεταφορά από το παλιό site</li><li><span class="tag t2">2</span>Google Shopping και διαφημίσεις καταλόγου</li><li><span class="tag t3">3</span>Καμπάνια για το νέο site</li></ul></article>
+      <article class="card phase"><span class="when">ΑΠΟ ΤΟΝ 5Ο ΜΗΝΑ</span><h4>Ανάπτυξη</h4><ul class="clean"><li><span class="tag t3">3</span>Αρθρογραφία στο site και στα μέσα ενημέρωσης (επιπρόσθετο)</li><li>Email marketing, κριτικές</li><li>Αυτοματισμοί για υπάρχοντες πελάτες</li><li>Πρόγραμμα υποστήριξης σε κανονικό ρυθμό</li></ul></article>
+    </div>
+
+    <div class="sub" id="cost">
+      <h3>Συνολική εικόνα κόστους</h3>
+      <div class="tbl" role="region" aria-label="Συνολικό κόστος" tabindex="0">
+        <table>
+          <thead><tr><th>ΚΟΜΜΑΤΙ</th><th>ΕΝΟΤΗΤΑ</th><th>ΚΑΝΟΝΙΚΗ ΤΙΜΗ</th><th>ΤΙΜΗ ΣΥΝΕΡΓΑΣΙΑΣ</th></tr></thead>
+          <tbody>
+            <tr><td colspan="4" style="background:var(--sunk);font:600 .72rem/1.2 var(--body);letter-spacing:.1em;color:var(--muted)">ΕΦΑΠΑΞ</td></tr>
+            <tr><td>Κατασκευή site &amp; e-shop</td><td>1</td><td><s>€11.000</s></td><td>€6.500</td></tr>
+            <tr><td>Αρχικό στήσιμο μέτρησης &amp; tracking</td><td>1</td><td>—</td><td>€750</td></tr>
+            <tr><td>Σύνολο εφάπαξ</td><td></td><td><s>€11.750</s></td><td><b>€7.250</b></td></tr>
+            <tr><td colspan="4" style="background:var(--sunk);font:600 .72rem/1.2 var(--body);letter-spacing:.1em;color:var(--muted)">ΜΗΝΙΑΙΑ</td></tr>
+            <tr><td>Hosting, backup &amp; ασφάλεια</td><td>1</td><td>—</td><td>€40</td></tr>
+            <tr><td>Υποστήριξη του site</td><td>1</td><td>—</td><td>€50</td></tr>
+            <tr><td>Διαχείριση διαφήμισης · φάση επαγγελματιών</td><td>2</td><td><s>€450</s></td><td>€250</td></tr>
+            <tr><td>Social media &amp; παραγωγή περιεχομένου</td><td>3</td><td><s>€800</s></td><td>€450</td></tr>
+            <tr><td>Σύνολο μηνιαία</td><td></td><td><s>€1.340</s></td><td><b>€790</b></td></tr>
+            <tr><td colspan="4" style="background:var(--sunk);font:600 .72rem/1.2 var(--body);letter-spacing:.1em;color:var(--muted)">ΕΠΙΠΡΟΣΘΕΤΑ</td></tr>
+            <tr><td>Αρθρογραφία στο site και στα μέσα ενημέρωσης · μετά τον 5ο μήνα</td><td>3</td><td>—</td><td>Προς συμφωνία</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="background:var(--blue);color:#fff;border-radius:14px;padding:28px max(20px,3vw);display:flex;flex-direction:column;gap:26px">
+        <div style="display:flex;flex-direction:column;gap:6px"><h4 style="font:600 1.5rem/1.2 var(--display);color:#fff">Με μια ματιά</h4><p style="opacity:.85;font-size:.9rem">Όλες οι τιμές είναι χωρίς ΦΠΑ. Η διαγραμμένη τιμή είναι η κανονική. Η τιμή συνεργασίας ισχύει για τη NORDE λόγω της γνωριμίας και της κοινής μας πορείας.</p></div>
+        <div>
+          <p style="font:600 .74rem/1 var(--body);letter-spacing:.14em;opacity:.8;margin-bottom:4px">ΕΦΑΠΑΞ</p>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.22)"><span>Κατασκευή site &amp; e-shop<br><span style="font-size:.8rem;opacity:.8">Ολοκλήρωση σε περίπου 3 με 4 μήνες</span></span><span style="white-space:nowrap;font-variant-numeric:tabular-nums"><s style="opacity:.6;margin-right:8px">€11.000</s><b>€6.500</b></span></div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.22)"><span>Αρχικό στήσιμο μέτρησης &amp; tracking</span><span style="white-space:nowrap;font-variant-numeric:tabular-nums"><b>€750</b></span></div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px 12px;padding-top:12px"><span style="font:600 .74rem/1 var(--body);letter-spacing:.12em">ΣΥΝΟΛΟ ΕΦΑΠΑΞ</span><span style="white-space:nowrap"><s style="opacity:.6;margin-right:10px;font-size:1.1rem">€11.750</s><span style="font:600 2.2rem/1 var(--display)">€7.250</span> <span style="opacity:.85">+ ΦΠΑ</span></span></div>
+        </div>
+        <div>
+          <p style="font:600 .74rem/1 var(--body);letter-spacing:.14em;opacity:.8;margin-bottom:4px">ΜΗΝΙΑΙΑ</p>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.22)"><span>Hosting, backup &amp; ασφάλεια</span><span style="white-space:nowrap;font-variant-numeric:tabular-nums"><b>€40</b></span></div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.22)"><span>Υποστήριξη του site</span><span style="white-space:nowrap;font-variant-numeric:tabular-nums"><b>€50</b></span></div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.22)"><span>Διαχείριση διαφήμισης · φάση επαγγελματιών</span><span style="white-space:nowrap;font-variant-numeric:tabular-nums"><s style="opacity:.6;margin-right:8px">€450</s><b>€250</b></span></div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.22)"><span>Social media &amp; παραγωγή περιεχομένου</span><span style="white-space:nowrap;font-variant-numeric:tabular-nums"><s style="opacity:.6;margin-right:8px">€800</s><b>€450</b></span></div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px 12px;padding-top:12px"><span style="font:600 .74rem/1 var(--body);letter-spacing:.12em">ΣΥΝΟΛΟ ΜΗΝΙΑΙΑ</span><span style="white-space:nowrap"><s style="opacity:.6;margin-right:10px;font-size:1.1rem">€1.340</s><span style="font:600 2.2rem/1 var(--display)">€790</span> <span style="opacity:.85">/ μήνα + ΦΠΑ</span></span></div>
+        </div>
+        <div>
+          <p style="font:600 .74rem/1 var(--body);letter-spacing:.14em;opacity:.8;margin-bottom:4px">ΕΠΙΠΡΟΣΘΕΤΑ</p>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.22)"><span>Αρθρογραφία στο site και στα μέσα ενημέρωσης<br><span style="font-size:.8rem;opacity:.8">Ξεκινά μετά τον 5ο μήνα</span></span><span style="white-space:nowrap;font-variant-numeric:tabular-nums"><b>Προς συμφωνία</b></span></div>
+        </div>
+      </div>
+      <article class="card">
+        <h4>Δεν περιλαμβάνονται</h4>
+        <ul class="clean">
+          <li><b>Ο προϋπολογισμός διαφήμισης:</b> πληρώνεται απευθείας στη Meta και στη Google.</li>
+          <li><b>Email marketing και διαφήμιση για ιδιώτες:</b> ξεκινούν μαζί με το e-shop και κοστολογούνται τότε.</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="sub">
+      <h3>Τι χρειαζόμαστε από εσάς για να ξεκινήσουμε</h3>
+      <div class="grid g2">
+        <article class="card"><ul class="clean">
+          <li>Ποιος θα είναι ο υπεύθυνος για τις επικοινωνίες επαγγελματιών.</li>
+          <li>Ποιοι από την ομάδα χρειάζονται email, και ποιο domain κρατάμε.</li>
+          <li>Πρόσβαση στο domain, στο σημερινό site, στα social και σε τυχόν προφίλ Google.</li>
+          <li>Το λογότυπο σε αρχείο vector και τα χρώματα της NORDE.</li>
+          <li>Ποιοι θα βγουν μπροστά στην κάμερα.</li>
+        </ul></article>
+        <article class="card"><ul class="clean">
+          <li>Export πωλήσεων 12 μηνών ανά κωδικό, για να επιλέξουμε τα κύρια προϊόντα.</li>
+          <li>Υλικό από παραγωγούς: φωτογραφίες, τεχνικά δελτία, ιστορίες.</li>
+          <li>Πολιτική μεταφορικών για ιδιώτες εκτός Ηπείρου.</li>
+          <li>Επιβεβαίωση ποιες αποκλειστικότητες μπορούμε να γράψουμε δημόσια.</li>
+          <li>Με ποιους παραγωγούς ξεκινάμε τις επισκέψεις.</li>
+        </ul></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Thynk Digital Agency · Ιωάννινα · thynkagency.gr</span>
+    <span>Σχέδιο προς συζήτηση. Τίποτα δεν δημοσιεύεται για λογαριασμό της NORDE χωρίς επιβεβαίωση.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var map={website:'website',ads:'ads',social:'social',extra:'plan',plan:'plan',cost:'plan'};
+  var order=['website','ads','social','plan'];
+  var names={website:'Website & υποδομή',ads:'Διαφήμιση',social:'Social & περιεχόμενο',plan:'Σειρά & κόστος'};
+  var secs={website:['website'],ads:['ads'],social:['social'],plan:['extra','plan']};
+  order.forEach(function(t,i){
+    var last=document.getElementById(secs[t][secs[t].length-1]).querySelector('.wrap');
+    var d=document.createElement('div');d.className='tabnext';
+    d.innerHTML=(i>0?'<a href="#'+order[i-1]+'">← '+names[order[i-1]]+'</a>':'<span></span>')+(i<order.length-1?'<a href="#'+order[i+1]+'">'+names[order[i+1]]+' →</a>':'');
+    last.appendChild(d);
+  });
+  function show(scroll){
+    var h=(location.hash||'').slice(1),t=map[h]||'website';
+    order.forEach(function(k){secs[k].forEach(function(id){document.getElementById(id).hidden=(k!==t);});});
+    document.querySelectorAll('.nav .links a').forEach(function(a){if(a.dataset.tab===t)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+    if(scroll){var el=document.getElementById(h)||document.getElementById(secs[t][0]);var nav=document.querySelector('.nav');var y=el.getBoundingClientRect().top+window.pageYOffset-(nav?nav.offsetHeight:0);window.scrollTo(0,Math.max(0,y));}
+  }
+  window.addEventListener('hashchange',function(){show(true);});
+  show(!!location.hash);
+})();
+(function(){
+  var btns=document.querySelectorAll('.cycles button'),note=document.getElementById('cycNote');
+  var txt={3:'Μία πληρωμή για 3 μήνες υποστήριξης.',6:'Μία πληρωμή για 6 μήνες υποστήριξης.',12:'Μία πληρωμή για 12 μήνες υποστήριξης.'};
+  btns.forEach(function(b){b.addEventListener('click',function(){btns.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});note.textContent=txt[b.dataset.m];});});
+})();
+</script>
+
+</body>
+</html>
